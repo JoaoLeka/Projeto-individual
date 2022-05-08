@@ -36,7 +36,7 @@ align-items: center;
 margin-top: -500px;
 }
 .card .container input{
-margin-bottom: 20px;
+margin-bottom: 10px;
 outline: 0;
 border: 0px;
 border-bottom: 2px solid black;
@@ -58,6 +58,11 @@ align-items: center;
 text-align: center;
 padding-top: 200px;
 
+}
+
+.incorreto{
+  color: red;
+  margin-top: 0;
 }
 
 button{
@@ -87,6 +92,7 @@ margin-top: 0;
 color: #00bad0;
 -webkit-text-stroke: 0.3px black;
 text-shadow: 3px 3px 7px black;
+
 }
 
 
@@ -103,6 +109,7 @@ button a{
   .loading-div img {
     height: 50px;
     width: 50px;
+    margin-left: 0;
   }
 
   .alerta_erro{
