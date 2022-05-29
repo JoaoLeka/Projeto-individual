@@ -48,7 +48,7 @@ text-decoration: underline;
 }
 
 .banner .container{
-    height: 600px;
+    height: 630px;
 margin: 0;
 background-color: black;
 background-size: cover;
@@ -57,6 +57,11 @@ display: flex;
 justify-content: space-between;
 border-bottom: 2px solid #00bad0;
 }
+
+
+
+
+
 .banner .container .objetivo{
     margin-left: 90px;
     color:  #ee70a9;
@@ -115,7 +120,8 @@ display: flex;
 justify-content: space-between;
 }
 .contexto .container .sobre{
-
+    -webkit-text-stroke-width: 0.2px;
+    -webkit-text-stroke-color: #000;
 color: #ee70a9;
 width: 30vw;
 display: flex;
@@ -124,6 +130,38 @@ align-items: center;
 margin-left: 40px;
 
 }
+
+
+.banner2 .container{
+    height: 900px;
+margin: 0;
+background-image: url('../img/tumblr_dfacbf8386b6ea2007037bb782e05ae2_9286e500_500.webp');
+background-size: cover;
+background-repeat: no-repeat;
+display: flex;
+align-items: center;
+justify-content: center;
+border-bottom: 2px solid #00bad0;
+}
+.contexto2 .container{
+    margin: 0;
+    height: 140vh;
+    background-image: linear-gradient(to bottom, white, rgb(215, 215, 215));
+    display: flex;
+    width: 1000px;
+    margin-right: 10px;
+    }
+    .contexto2 .container .sobre2{
+        -webkit-text-stroke-width: 0.2px;
+        -webkit-text-stroke-color: #000;
+    color: #ee70a9;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 40px;
+    
+    }
 .contexto .container .video{
 margin-top: 20px;
 margin-right: 40px;
@@ -132,6 +170,13 @@ margin-right: 40px;
 
 .sobre p{
     font-size: 25px;
+}
+.sobre2 p{
+    font-size: 25px;
+}
+.sobre2 img{
+
+    height: 500px;
 }
 .footer .container{
 margin: 0;

@@ -1,6 +1,8 @@
 body{
     margin: 0;
     background-color: black;
+    display:inline-block;
+overflow-x: hidden
 }
 
 .left-navbar {
@@ -16,9 +18,20 @@ body{
     align-items: center;
     border-right: 2px solid #c8417e;
     background-color: #212124;
-    
+    color: #c8417e;
   }
+.welcome{
+  display: flex;
+  flex-direction: column;
+}
+.welcome h3{
+  margin: 0;
+}
 
+.sair{
+cursor: pointer;
+
+}
   .janela {
     display: flex;
     width: 100vw;
@@ -79,7 +92,8 @@ cursor: pointer;
     .grafico{
       background-color: #212124;
       height: 500px;
-  width: 76%;
+  width: 75%;
+  color: #c8417e;
   margin-left: 310px;
   margin-top: 20px;
   border: 2px solid #c8417e;
@@ -90,4 +104,16 @@ cursor: pointer;
     position: relative; 
     height:40vh; 
     width:37vw
+}
+
+
+::-webkit-scrollbar{
+  width: 10px;
+  background-color: #00bad0;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #c8417e;
+  border-radius: 90px;
+  border: 1px solid black;
 }
