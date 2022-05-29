@@ -79,9 +79,7 @@
         </div>
         <div>
             <canvas id="myChart"></canvas>
-            <h1 id="valorTemp">
-               
-              </h1>
+            
         </div>
 
     </div>
@@ -136,9 +134,9 @@
 
 
     let proximaAtualizacao;
-
+    let proximaAtualizacao2;
 window.onload = obterDadosGrafico(1);
-
+window.onload = obterDadosGrafico(1);
 b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
 
@@ -181,6 +179,35 @@ function obterDadosGrafico(idUsuario) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
 }
+
+
+
+function obterDadosGrafico2(idUsuario) {
+
+
+if (proximaAtualizacao2 != undefined) {
+    clearTimeout(proximaAtualizacao2);
+}
+
+fetch(`/medidas/ultimas2`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGrafico2(resposta, idUsuario);
+            
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+
 
 
 // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
@@ -263,6 +290,91 @@ function plotarGrafico(resposta, idUsuario) {
 }
 
 
+function plotarGrafico2(resposta, idUsuario) {
+    console.log('iniciando plotagem do gráfico...');
+
+    var dados = {
+        labels: [],
+        datasets: [
+            
+                
+               
+               {
+                yAxisID: 'y-trench',
+                label: 'trench',
+                borderColor: 'yellow',
+                backgroundColor: 'yellow',
+                fill: true,
+                data: []
+            },
+            {
+                yAxisID: 'y-blurryface',
+                label: 'blurryface',
+                borderColor: 'black',
+                backgroundColor: 'black',
+                fill: true,
+                data: []
+            },
+        ]
+    };
+
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        
+        dados.datasets[0].data.push(registro.trench);
+        dados.datasets[0].data.push(registro.blurryface);
+    }
+
+    console.log(JSON.stringify(dados));
+
+    var ctx = myChart2.getContext('2d');
+    window.grafico_linha2 = Chart.Line(ctx, {
+        data: dados,
+        options: {
+            responsive: true,
+            animation: { duration: 500 },
+            hoverMode: 'index',
+            stacked: false,
+            title: {
+                display: false,
+                text: 'Dados capturados'
+            },
+            scales: {
+                yAxes: [{
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    id: 'y-trench',
+                    ticks: {
+                        beginAtZero: true,
+                        max: 100,
+                        min: 0
+                    }
+                }, {
+                    type: 'linear',
+                    display: false,
+                    position: 'right',
+                    id: 'y-blurryface',
+                    ticks: {
+                        beginAtZero: true,
+                        max: 100,
+                        min: 0
+                    },
+
+                    gridLines: {
+                        drawOnChartArea: false,
+                    },
+                }],
+            }
+        }
+    });
+
+    setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+
+   
+
+}
+
 // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
 // buscando a última medida inserida em tabela contendo as capturas, 
 
@@ -302,6 +414,46 @@ function atualizarGrafico(idUsuario, dados) {
         .catch(function (error) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
+
+}
+
+function atualizarGrafico2(idUsuario, dados) {
+
+fetch(`/medidas/tempo-real2`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico: ${dados}`);
+
+            // tirando e colocando valores no gráfico
+            dados.labels.shift(); // apagar o primeiro
+
+            // tirando e colocando valores no gráfico
+            dados.labels.shift(); // apagar o primeiro
+            
+
+
+            dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+            dados.datasets[0].data.push(novoRegistro[0].trench); // incluir uma nova medida de temperatura
+
+            dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+            dados.datasets[0].data.push(novoRegistro[0].blurryface); // incluir uma nova medida de temperatura
+
+            window.grafico_linha2.update();
+
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
 
 }
 
