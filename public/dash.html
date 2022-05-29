@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votação</title>
+    <link rel="icon" href="../img/21-Pilots-logo.png">
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script src="../js/funcoes.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+</head>
+<!-- validarSessao(), -->
+<!-- onload=" atualizacaoPeriodica()" -->
+<!-- validarSessao() -->
+<body onload="validarSessao(), atualizacaoPeriodica()">
+
+    <div class="janela">
+
+
+        <div class="left-navbar">
+
+            <img src="/img/logo.png" style="height: 150px;">
+
+<div class="welcome">
+            <h3>Seja bem vindo</h3> <h3> <span id="b_usuario">usuário</span>!</h3>
+        </div>
+
+
+
+
+
+
+            <div class="sair" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+
+
+        <div class="selecao">
+            <div class="voto">
+                <h3>Selecione seu album favorito:</h3>
+                <select id="album" onclick="sele()">
+                    <option value="0">Albúm</option>
+                    <option value="2">Blurryface</option>
+                    <option value="1">Trench</option>
+
+                    <option value="6">Vessel</option>
+
+                    <option value="3">Scaled and icy</option>
+
+                    <option value="5">Self titled</option>
+
+                    <option value="4">Regional at best</option>
+                    
+
+                </select>
+                <div class="video" id="videos"><iframe width="560" height="315"
+                        src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe></div>
+                        <button onclick="cadastrar2()" style="height: 40px;">Votar</button>
+            </div>
+            
+
+        </div>
+
+
+    </div>
+    <div class="grafico">
+        <div>
+            <canvas id="myChart2"></canvas>
+        </div>
+        <div>
+            <canvas id="myChart"></canvas>
+            <h1 id="valorTemp">
+               
+              </h1>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+
+
+
+
+    function cadastrar2() {
+        
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+       
+        var seleVideoVar= album.value
+
+
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar2", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+            
+               seleVideoServer: seleVideoVar,
+
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        
+        });
+
+        return false;
+    }
+
+    
+
+
+    let proximaAtualizacao;
+
+window.onload = obterDadosGrafico(1);
+
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+
+
+// verificar_autenticacao();
+
+
+// O gráfico é construído com três funções:
+// 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+// 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+// 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+// Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+// para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+// A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+//     Para ajustar o "select", ajuste o comando sql em src/models
+function obterDadosGrafico(idUsuario) {
+
+
+    if (proximaAtualizacao != undefined) {
+        clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico(resposta, idUsuario);
+                
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGrafico(resposta, idUsuario) {
+    console.log('iniciando plotagem do gráfico...');
+
+    var dados = {
+        labels: [],
+        datasets: [
+            
+                
+               
+               {
+                yAxisID: 'y-temperatura',
+                label: 'Numero de pessoas cadastradas',
+                borderColor: '#FFF',
+                backgroundColor: '#32b9cd8f',
+                fill: true,
+                data: []
+            }
+        ]
+    };
+
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.labels.push(registro.momento_grafico);
+        dados.datasets[0].data.push(registro.temperatura);
+    }
+
+    console.log(JSON.stringify(dados));
+
+    var ctx = myChart.getContext('2d');
+    window.grafico_linha = Chart.Line(ctx, {
+        data: dados,
+        options: {
+            responsive: true,
+            animation: { duration: 500 },
+            hoverMode: 'index',
+            stacked: false,
+            title: {
+                display: false,
+                text: 'Dados capturados'
+            },
+            scales: {
+                yAxes: [{
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                    id: 'y-temperatura',
+                    ticks: {
+                        beginAtZero: true,
+                        max: 100,
+                        min: 0
+                    }
+                }, {
+                    type: 'linear',
+                    display: false,
+                    position: 'right',
+                    id: 'y-umidade',
+                    ticks: {
+                        beginAtZero: true,
+                        max: 100,
+                        min: 0
+                    },
+
+                    gridLines: {
+                        drawOnChartArea: false,
+                    },
+                }],
+            }
+        }
+    });
+
+    setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
+
+   
+
+}
+
+
+// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+// buscando a última medida inserida em tabela contendo as capturas, 
+
+//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+//     Para ajustar o "select", ajuste o comando sql em src/models
+function atualizarGrafico(idUsuario, dados) {
+
+    fetch(`/medidas/tempo-real`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (novoRegistro) {
+
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                console.log(`Dados atuais do gráfico: ${dados}`);
+
+                // tirando e colocando valores no gráfico
+                dados.labels.shift(); // apagar o primeiro
+
+                // tirando e colocando valores no gráfico
+                dados.labels.shift(); // apagar o primeiro
+                dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+
+                dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+                dados.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                window.grafico_linha.update();
+
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+}
+
+
+// <option value="2">Blurryface</option>
+//                     <option value="1">Trench</option>
+
+//                     <option value="6">Vessel</option>
+
+//                     <option value="3">Scaled and icy</option>
+
+//                     <option value="5">Self titled</option>
+
+//                     <option value="4">Regional at best</option>
+
+// <!-- <option value="1">Blurryface</option>
+//                     <option value="2">Trench</option>
+
+//                     <option value="3">Vessel</option>
+
+//                     <option value="4">Scaled and icy</option>
+
+//                     <option value="5">Self titled</option>
+
+//                     <option value="6">Regional at best</option> -->
+
+
+function sele() {
+    var seleVideo = album.value
+
+    if (seleVideo == "1") {
+        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/UOUBW8bkjQ4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+    } else if (seleVideo == "6") {
+
+        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/92XVwY54h5k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+
+    } else if (seleVideo == "3") {
+
+        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/_FcWwwOWgk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+
+    } else if (seleVideo == "5") {
+
+        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/2JE8R9KfJwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+
+    } else if (seleVideo == "4") {
+
+        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/-2-gwRvrdnY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+
+    } else if (seleVideo == "2") {
+
+        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+
+
+    }
+
+
+
+}
+
+
+
+// function votar() {
+
+// var seleVideo = album.value
+// var database = require("../../src/database/config.js")
+// if (seleVideo == "1") {
+    
+// var instrucao = `
+//     INSERT INTO votos VALUES ('1');
+// `;
+// console.log("Executando a instrução SQL: \n" + instrucao);
+// return database.executar(instrucao);
+// }
+// }
+
+// fetch("/usuarios/votar", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             // crie um atributo que recebe o valor recuperado aqui
+//             // Agora vá para o arquivo routes/usuario.js
+           
+//             seleServer: seleVideoVar,
+           
+
+//         })
+//     })
+
+
+
+
+
+</script>
