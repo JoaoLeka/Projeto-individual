@@ -18,7 +18,7 @@
 <!-- validarSessao(), -->
 <!-- onload=" atualizacaoPeriodica()" -->
 <!-- validarSessao() -->
-<body onload="validarSessao(), atualizacaoPeriodica(), requisitar()">
+<body onload="validarSessao(), atualizacaoPeriodica()">
 
     <div class="janela">
 
@@ -75,7 +75,7 @@
     </div>
     <div class="grafico">
         <div>
-            <canvas id="myChart3"></canvas>
+            <canvas id="myChart2"></canvas>
         </div>
         <div>
             <canvas id="myChart"></canvas>
@@ -89,91 +89,92 @@
 </html>
 
 <script>
-var nome0=""
-var nome1=""
-var nome2=""
-var nome3=""
-var nome4=""
-var nome5=""
-var album0=0
-var album1=0
-var album2=0
-var album3=0
-var album4=0
-var album5=0
-var total=0
-function requisitar() {
-        fetch("/usuarios/requisitar").then(function (res1) {
-            if (res1.ok) {
-                console.log(res1)
-                res1.json().then(function (res1) {
-                    console.log("Dados recebidos: ", JSON.stringify(res1))
-                    nome0 = res1[0].nome
-                    album0 = res1[0].voto
-                    total += album0
-                    nome1 = res1[1].nome
-                    album1 = res1[1].voto
-                    total += album1
-                    nome2 = res1[2].nome
-                    album2 = res1[2].voto
-                    total += album2
-                    nome3 = res1[3].nome
-                    album3 = res1[3].voto
-                    total += album3
-                    nome4 = res1[4].nome
-                    album4 = res1[4].voto
-                    total += album4
-                    nome5 = res1[5].nome
-                    album5 = res1[5].voto
-                    total += album5
-    data3.datasets[0].data[0] = album0
-    data3.datasets[0].data[1] = album1
-    data3.datasets[0].data[2] = album2
-    data3.datasets[0].data[3] = album3
-    data3.datasets[0].data[4] = album4
-    data3.datasets[0].data[5] = album5
-                }
-                );
-            } else {
-                throw ('Houve um erro ao pegar info!');
-            }
-        }).catch(function (res1) {
-            console.error(res1);
-        });
-    }
+// var nome0=""
+// var nome1=""
+// var nome2=""
+// var nome3=""
+// var nome4=""
+// var nome5=""
+// var album0=0
+// var album1=0
+// var album2=0
+// var album3=0
+// var album4=0
+// var album5=0
+// var total=0
+// function requisitar() {
+//         fetch("/medidas/requisitar").then(function (res1) {
+//             if (res1.ok) {
+//                 console.log(res1)
+//                 res1.json().then(function (res1) {
+//                     console.log("Dados recebidos: ", JSON.stringify(res1))
+//                     nome0 = res1[0].nome
+//                     album0 = res1[0].voto
+//                     total += album0
+//                     nome1 = res1[1].nome
+//                     album1 = res1[1].voto
+//                     total += album1
+//                     nome2 = res1[2].nome
+//                     album2 = res1[2].voto
+//                     total += album2
+//                     nome3 = res1[3].nome
+//                     album3 = res1[3].voto
+//                     total += album3
+//                     nome4 = res1[4].nome
+//                     album4 = res1[4].voto
+//                     total += album4
+//                     nome5 = res1[5].nome
+//                     album5 = res1[5].voto
+//                     total += album5
+//     data3.datasets[0].data[0] = album0
+//     data3.datasets[0].data[1] = album1
+//     data3.datasets[0].data[2] = album2
+//     data3.datasets[0].data[3] = album3
+//     data3.datasets[0].data[4] = album4
+//     data3.datasets[0].data[5] = album5
+//                 }
+//                 );
+//             } else {
+//                 throw ('Houve um erro ao pegar info!');
+//             }
+//         }).catch(function (res1) {
+//             console.error(res1);
+//         });
+//     }
+//     requisitar()
 
 
-    const data3 = {
-      labels:  [
-      'Trench',
-      'blurryface',
-      'Scaled and icy',
-      'Regional at best',
-      'Self titled',
-      'Vessel',
-    ],
-      datasets: [{
-        label: 'Votos', 
-        backgroundColor: ['rgb(233, 49, 49)',
-       'rgb(231, 228, 57)',
-        'rgb(50, 25, 194)',
-         'rgb(10, 10, 10)',
-        'rgb(40, 255, 50)',
-        'rgb(40, 255, 50)'],
+//     const data3 = {
+//       labels:  [
+//       'Trench',
+//       'blurryface',
+//       'Scaled and icy',
+//       'Regional at best',
+//       'Self titled',
+//       'Vessel',
+//     ],
+//       datasets: [{
+//         label: 'Votos', 
+//         backgroundColor: ['rgb(233, 49, 49)',
+//        'rgb(231, 228, 57)',
+//         'rgb(50, 25, 194)',
+//          'rgb(10, 10, 10)',
+//         'rgb(40, 255, 50)',
+//         'rgb(40, 255, 50)'],
         
-        data: [0, 0, 0, 0, 0, 0],
-      }
-      ]
-    };
-    const config2 = {
-      type: 'bar',
-      data: data3,
-      options: {}
-    };
-    const myChart3 = new Chart(
-      document.getElementById('myChart3'),
-      config2
-    );
+//         data: [0, 0, 0, 0, 0, 0],
+//       }
+//       ]
+//     };
+//     const config2 = {
+//       type: 'bar',
+//       data: data3,
+//       options: {}
+//     };
+//     const myChart3 = new Chart(
+//       document.getElementById('myChart3'),
+//       config2
+//     );
 
 
 
@@ -220,7 +221,7 @@ function requisitar() {
     let proximaAtualizacao;
     let proximaAtualizacao2;
 window.onload = obterDadosGrafico(1);
-window.onload = obterDadosGrafico(1);
+window.onload = obterDadosGrafico2(1);
 b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
 
@@ -273,7 +274,7 @@ if (proximaAtualizacao2 != undefined) {
     clearTimeout(proximaAtualizacao2);
 }
 
-fetch(`/medidas/ultimas2`, { cache: 'no-store' }).then(function (response) {
+fetch(`/requisitar/requisitar`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -384,35 +385,81 @@ function plotarGrafico2(resposta, idUsuario) {
                 
                
                {
-                yAxisID: 'y-ale',
-                label: 'ale',
+                yAxisID: 'y-trench',
+                label: 'trench',
                 borderColor: 'yellow',
                 backgroundColor: 'yellow',
                 fill: true,
                 data: []
             },
             {
-                yAxisID: 'y-bc',
-                label: 'bc',
+                yAxisID: 'y-blurryface',
+                label: 'blurryface',
                 borderColor: 'black',
                 backgroundColor: 'black',
                 fill: true,
                 data: []
             },
+            {
+                yAxisID: 'y-scaled and icy',
+                label: 'scaled and icy',
+                borderColor: 'pink',
+                backgroundColor: 'pink',
+                fill: true,
+                data: []
+            },
+            {
+                yAxisID: 'y-regional at best',
+                label: 'regional at best',
+                borderColor: 'pink',
+                backgroundColor: 'pink',
+                fill: true,
+                data: []
+            },
+            {
+                yAxisID: 'y-self-titled',
+                label: 'self-titled',
+                borderColor: 'pink',
+                backgroundColor: 'pink',
+                fill: true,
+                data: []
+            },
+            {
+                yAxisID: 'y-vessel',
+                label: 'vessel',
+                borderColor: 'pink',
+                backgroundColor: 'pink',
+                fill: true,
+                data: []
+            },
+
         ]
     };
 
     for (i = 0; i < resposta.length; i++) {
         var registro = resposta[i];
-        
-        dados.datasets[0].data.push(registro.ab);
-        dados.datasets[0].data.push(registro.bc);
+        if(registro.nome== 'trench'){
+        dados.datasets[0].data.push(registro.voto)}
+        else if(registro.nome== 'blurryface'){
+        dados.datasets[1].data.push(registro.voto)
+    }    else if(registro.nome== 'scaled and icy'){
+        dados.datasets[2].data.push(registro.voto)
+    }
+    else if(registro.nome== 'regional at best'){
+        dados.datasets[3].data.push(registro.voto)
+    }
+    else if(registro.nome== 'self-titled'){
+        dados.datasets[4].data.push(registro.voto)
+    }else if(registro.nome== 'vessel'){
+        dados.datasets[5].data.push(registro.voto)
+    }
+
     }
 
     console.log(JSON.stringify(dados));
 
     var ctx = myChart2.getContext('2d');
-    window.grafico_linha2 = Chart.Line(ctx, {
+    window.grafico_linha2 = Chart.Bar(ctx, {
         data: dados,
         options: {
             responsive: true,
@@ -428,7 +475,7 @@ function plotarGrafico2(resposta, idUsuario) {
                     type: 'linear',
                     display: true,
                     position: 'left',
-                    id: 'y-bc',
+                    id: 'y-temperatura',
                     ticks: {
                         beginAtZero: true,
                         max: 100,
@@ -438,7 +485,7 @@ function plotarGrafico2(resposta, idUsuario) {
                     type: 'linear',
                     display: false,
                     position: 'right',
-                    id: 'y-ab',
+                    id: 'y-umidade',
                     ticks: {
                         beginAtZero: true,
                         max: 100,
@@ -503,7 +550,7 @@ function atualizarGrafico(idUsuario, dados) {
 
 function atualizarGrafico2(idUsuario, dados) {
 
-fetch(`/medidas/tempo-real2`, { cache: 'no-store' }).then(function (response) {
+fetch(`/requisitar/requisitar`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (novoRegistro) {
 

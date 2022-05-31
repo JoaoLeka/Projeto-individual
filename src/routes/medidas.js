@@ -18,4 +18,8 @@ router.get("/tempo-real2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
 })
 
+router.get("/requisitar", function (req, res) {
+    medidaController.requisitar(req, res);
+});
+
 module.exports = router;
