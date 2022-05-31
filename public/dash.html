@@ -1,79 +1,131 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Votação</title>
-    <link rel="icon" href="../img/21-Pilots-logo.png" />
-    <link rel="stylesheet" href="css/dashboard.css" />
 
-    <script
-      type="text/javascript"
-      src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
-    ></script>
-    <script src="../js/funcoes.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Votação</title>
+  <link rel="icon" href="../img/21-Pilots-logo.png" />
+  <link rel="stylesheet" href="css/dashboard.css" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-  </head>
-  <!-- validarSessao(), -->
-  <!-- onload=" atualizacaoPeriodica()" -->
-  <!-- validarSessao() -->
-  <body onload="validarSessao(), atualizacaoPeriodica()">
-    <div class="janela">
-      <div class="left-navbar">
-        <img src="/img/logo.png" style="height: 150px" />
+  <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+  <script src="../js/funcoes.js"></script>
 
-        <div class="welcome">
-          <h3>Seja bem vindo</h3>
-          <h3><span id="b_usuario">usuário</span>!</h3>
-        </div>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+</head>
+<!-- validarSessao(), -->
+<!-- onload=" atualizacaoPeriodica()" -->
+<!-- validarSessao() -->
 
-        <div class="sair" onclick="limparSessao()">
-          <h3>Sair</h3>
-        </div>
+<body onload="validarSessao(), atualizacaoPeriodica()">
+  <div class="janela">
+    <div class="left-navbar">
+      <img src="/img/logo.png" style="height: 150px" />
+
+      <div class="welcome">
+        <h3>Seja bem vindo</h3>
+        <h3><span id="b_usuario">usuário</span>!</h3>
       </div>
 
-      <div class="selecao">
-        <div class="voto">
-          <h3>Selecione seu album favorito:</h3>
-          <select id="album" onclick="sele()">
-            <option value="0">Albúm</option>
-            <option value="2">Blurryface</option>
-            <option value="1">Trench</option>
-
-            <option value="6">Vessel</option>
-
-            <option value="3">Scaled and icy</option>
-
-            <option value="5">Self titled</option>
-
-            <option value="4">Regional at best</option>
-          </select>
-          <div class="video" id="videos">
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/HDI9inno86U"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <button onclick="cadastrar2()" style="height: 40px">Votar</button>
-        </div>
+      <div class="sair" onclick="limparSessao()">
+        <h3>Sair</h3>
       </div>
     </div>
-    <div class="grafico">
-      <div>
-        <canvas id="myChart2"></canvas>
-      </div>
-      <div>
-        <canvas id="myChart"></canvas>
+
+    <div class="selecao">
+      <div class="voto">
+        <h3>Selecione seu album favorito:</h3>
+        <select id="album" onclick="sele()">
+          <option value="0">Albúm</option>
+          <option value="2">Blurryface</option>
+          <option value="1">Trench</option>
+
+          <option value="6">Vessel</option>
+
+          <option value="3">Scaled and icy</option>
+
+          <option value="5">Self titled</option>
+
+          <option value="4">Regional at best</option>
+        </select>
+        <div class="video" id="videos">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+        <button onclick="cadastrar2()" style="height: 40px">Votar</button>
       </div>
     </div>
-  </body>
+  </div>
+  <div class="grafico">
+    <h1>Quantitades de votos até agora:</h1>
+    <div class="grafico1">
+
+      <canvas id="myChart2"></canvas>
+    </div>
+    <div class="numeros">
+
+      <div class="trench">
+        <b>
+        <p>Trench</p> <br>
+        <span>0</span>
+      </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Trench</p> <br>
+          <span>0</span>
+        </b>
+        
+      </div>
+      <div class="trench">
+        <b>
+          <p>Trench</p> <br>
+          <span>0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Trench</p> <br>
+          <span>0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Trench</p> <br>
+          <span>0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Trench</p> <br>
+          <span>0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Trench</p> <br>
+          <span>0</span>
+        </b>
+      </div>
+    
+    
+  </div>
+
+
+  </div>
+
+  <div class="grafico">
+
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -164,20 +216,18 @@
   //     );
 
   function cadastrar2() {
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
+
 
     var seleVideoVar = album.value;
 
-    // Enviando o valor da nova input
+
     fetch("/usuarios/cadastrar2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
+
 
         seleVideoServer: seleVideoVar,
       }),
@@ -335,58 +385,23 @@
     obterDadosGrafico2(1);
   }
 
+  var album0 = 0
+  var album1 = 0
+  var album2 = 0
+  var album3 = 0
+  var album4 = 0
+  var album5 = 0
+  var albumLista = []
   function plotarGrafico2(resposta, idAlbum) {
     console.log("iniciando plotagem do gráfico...");
 
-    /*
-    
-        {
-          yAxisID: "y-blurryface",
-          label: "blurryface",
-          borderColor: "#32B9CD",
-          backgroundColor: "#32B9CD",
-          fill: true,
-          data: [],
-        },
-        {
-          yAxisID: "y-scaled and icy",
-          label: "scaled and icy",
-          borderColor: "#32B9CD",
-          backgroundColor: "#32B9CD",
-          fill: true,
-          data: [],
-        },
-        {
-          yAxisID: "y-regional at best",
-          label: "regional at best",
-          borderColor: "#32B9CD",
-          backgroundColor: "#32B9CD",
-          fill: true,
-          data: [],
-        },
-        {
-          yAxisID: "y-self-titled",
-          label: "self-titled",
-          borderColor: "#32B9CD",
-          backgroundColor: "#32B9CD",
-          fill: true,
-          data: [],
-        },
-        {
-          yAxisID: "y-vessel",
-          label: "vessel",
-          borderColor: "#32B9CD",
-          backgroundColor: "#32B9CD",
-          fill: true,
-          data: [],
-        },
-    */
+
 
     var dados2 = {
       labels: [],
       datasets: [
         {
-          backgroundColor:['white','white','#469BD2','#c8417e','black','yellow'],
+          backgroundColor: ['white', 'white', '#469BD2', '#c8417e', 'black', 'yellow'],
           label: "Album",
           data: [],
         },
@@ -397,22 +412,38 @@
       var registro = resposta[i];
       if (registro.nome == "trench") {
         dados2.datasets[0].data.push(registro.voto);
+        album0 = registro.voto
+
       } else if (registro.nome == "blurryface") {
         dados2.datasets[0].data.push(registro.voto);
+        album1 = registro.voto
       } else if (registro.nome == "scaled and icy") {
         dados2.datasets[0].data.push(registro.voto);
+        album2 = registro.voto
       } else if (registro.nome == "regional at best") {
         dados2.datasets[0].data.push(registro.voto);
+        album3 = registro.voto
+
       } else if (registro.nome == "self-titled") {
         dados2.datasets[0].data.push(registro.voto);
+        album4 = registro.voto
       } else if (registro.nome == "vessel") {
         dados2.datasets[0].data.push(registro.voto);
+        album5 = registro.voto
       }
       dados2.labels.push(registro.nome);
     }
 
     console.log("dados2", dados2);
+    albumLista.push(album0, album1, album2, album3, album4, album5)
 
+    var maior = 0
+    for (var i = 0; i < albumLista.length; i++) {
+      if (albumLista[i] > maior) {
+        maior = albumLista[i]
+      }
+
+    }
     var ctx = document.getElementById("myChart2").getContext("2d");
     window.grafico_linha2 = Chart.Bar(ctx, {
       data: dados2,
@@ -434,7 +465,7 @@
               id: "y-temperatura",
               ticks: {
                 beginAtZero: true,
-                max: 100,
+                max: maior,
                 min: 0,
               },
             },
@@ -586,31 +617,5 @@
     }
   }
 
-  // function votar() {
 
-  // var seleVideo = album.value
-  // var database = require("../../src/database/config.js")
-  // if (seleVideo == "1") {
-
-  // var instrucao = `
-  //     INSERT INTO votos VALUES ('1');
-  // `;
-  // console.log("Executando a instrução SQL: \n" + instrucao);
-  // return database.executar(instrucao);
-  // }
-  // }
-
-  // fetch("/usuarios/votar", {
-  //         method: "POST",
-  //         headers: {
-  //             "Content-Type": "application/json"
-  //         },
-  //         body: JSON.stringify({
-  //             // crie um atributo que recebe o valor recuperado aqui
-  //             // Agora vá para o arquivo routes/usuario.js
-
-  //             seleServer: seleVideoVar,
-
-  //         })
-  //     })
 </script>
