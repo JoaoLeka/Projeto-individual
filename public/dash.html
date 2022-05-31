@@ -1,559 +1,476 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Votação</title>
-    <link rel="icon" href="../img/21-Pilots-logo.png">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="icon" href="../img/21-Pilots-logo.png" />
+    <link rel="stylesheet" href="css/dashboard.css" />
 
-    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+    ></script>
     <script src="../js/funcoes.js"></script>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-
-</head>
-<!-- validarSessao(), -->
-<!-- onload=" atualizacaoPeriodica()" -->
-<!-- validarSessao() -->
-<body onload="validarSessao(), atualizacaoPeriodica()">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+  </head>
+  <!-- validarSessao(), -->
+  <!-- onload=" atualizacaoPeriodica()" -->
+  <!-- validarSessao() -->
+  <body onload="validarSessao(), atualizacaoPeriodica()">
     <div class="janela">
+      <div class="left-navbar">
+        <img src="/img/logo.png" style="height: 150px" />
 
-
-        <div class="left-navbar">
-
-            <img src="/img/logo.png" style="height: 150px;">
-
-<div class="welcome">
-            <h3>Seja bem vindo</h3> <h3> <span id="b_usuario">usuário</span>!</h3>
+        <div class="welcome">
+          <h3>Seja bem vindo</h3>
+          <h3><span id="b_usuario">usuário</span>!</h3>
         </div>
 
-
-
-
-
-
-            <div class="sair" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
+        <div class="sair" onclick="limparSessao()">
+          <h3>Sair</h3>
         </div>
+      </div>
 
+      <div class="selecao">
+        <div class="voto">
+          <h3>Selecione seu album favorito:</h3>
+          <select id="album" onclick="sele()">
+            <option value="0">Albúm</option>
+            <option value="2">Blurryface</option>
+            <option value="1">Trench</option>
 
-        <div class="selecao">
-            <div class="voto">
-                <h3>Selecione seu album favorito:</h3>
-                <select id="album" onclick="sele()">
-                    <option value="0">Albúm</option>
-                    <option value="2">Blurryface</option>
-                    <option value="1">Trench</option>
+            <option value="6">Vessel</option>
 
-                    <option value="6">Vessel</option>
+            <option value="3">Scaled and icy</option>
 
-                    <option value="3">Scaled and icy</option>
+            <option value="5">Self titled</option>
 
-                    <option value="5">Self titled</option>
-
-                    <option value="4">Regional at best</option>
-                    
-
-                </select>
-                <div class="video" id="videos"><iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe></div>
-                        <button onclick="cadastrar2()" style="height: 40px;">Votar</button>
-            </div>
-            
-
+            <option value="4">Regional at best</option>
+          </select>
+          <div class="video" id="videos">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/HDI9inno86U"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <button onclick="cadastrar2()" style="height: 40px">Votar</button>
         </div>
-
-
+      </div>
     </div>
     <div class="grafico">
-        <div>
-            <canvas id="myChart2"></canvas>
-        </div>
-        <div>
-            <canvas id="myChart"></canvas>
-            
-        </div>
-
+      <div>
+        <canvas id="myChart2"></canvas>
+      </div>
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
 
 <script>
-// var nome0=""
-// var nome1=""
-// var nome2=""
-// var nome3=""
-// var nome4=""
-// var nome5=""
-// var album0=0
-// var album1=0
-// var album2=0
-// var album3=0
-// var album4=0
-// var album5=0
-// var total=0
-// function requisitar() {
-//         fetch("/medidas/requisitar").then(function (res1) {
-//             if (res1.ok) {
-//                 console.log(res1)
-//                 res1.json().then(function (res1) {
-//                     console.log("Dados recebidos: ", JSON.stringify(res1))
-//                     nome0 = res1[0].nome
-//                     album0 = res1[0].voto
-//                     total += album0
-//                     nome1 = res1[1].nome
-//                     album1 = res1[1].voto
-//                     total += album1
-//                     nome2 = res1[2].nome
-//                     album2 = res1[2].voto
-//                     total += album2
-//                     nome3 = res1[3].nome
-//                     album3 = res1[3].voto
-//                     total += album3
-//                     nome4 = res1[4].nome
-//                     album4 = res1[4].voto
-//                     total += album4
-//                     nome5 = res1[5].nome
-//                     album5 = res1[5].voto
-//                     total += album5
-//     data3.datasets[0].data[0] = album0
-//     data3.datasets[0].data[1] = album1
-//     data3.datasets[0].data[2] = album2
-//     data3.datasets[0].data[3] = album3
-//     data3.datasets[0].data[4] = album4
-//     data3.datasets[0].data[5] = album5
-//                 }
-//                 );
-//             } else {
-//                 throw ('Houve um erro ao pegar info!');
-//             }
-//         }).catch(function (res1) {
-//             console.error(res1);
-//         });
-//     }
-//     requisitar()
+  // var nome0=""
+  // var nome1=""
+  // var nome2=""
+  // var nome3=""
+  // var nome4=""
+  // var nome5=""
+  // var album0=0
+  // var album1=0
+  // var album2=0
+  // var album3=0
+  // var album4=0
+  // var album5=0
+  // var total=0
+  // function requisitar() {
+  //         fetch("/medidas/requisitar").then(function (res1) {
+  //             if (res1.ok) {
+  //                 console.log(res1)
+  //                 res1.json().then(function (res1) {
+  //                     console.log("Dados recebidos: ", JSON.stringify(res1))
+  //                     nome0 = res1[0].nome
+  //                     album0 = res1[0].voto
+  //                     total += album0
+  //                     nome1 = res1[1].nome
+  //                     album1 = res1[1].voto
+  //                     total += album1
+  //                     nome2 = res1[2].nome
+  //                     album2 = res1[2].voto
+  //                     total += album2
+  //                     nome3 = res1[3].nome
+  //                     album3 = res1[3].voto
+  //                     total += album3
+  //                     nome4 = res1[4].nome
+  //                     album4 = res1[4].voto
+  //                     total += album4
+  //                     nome5 = res1[5].nome
+  //                     album5 = res1[5].voto
+  //                     total += album5
+  //     data3.datasets[0].data[0] = album0
+  //     data3.datasets[0].data[1] = album1
+  //     data3.datasets[0].data[2] = album2
+  //     data3.datasets[0].data[3] = album3
+  //     data3.datasets[0].data[4] = album4
+  //     data3.datasets[0].data[5] = album5
+  //                 }
+  //                 );
+  //             } else {
+  //                 throw ('Houve um erro ao pegar info!');
+  //             }
+  //         }).catch(function (res1) {
+  //             console.error(res1);
+  //         });
+  //     }
+  //     requisitar()
 
+  //     const data3 = {
+  //       labels:  [
+  //       'Trench',
+  //       'blurryface',
+  //       'Scaled and icy',
+  //       'Regional at best',
+  //       'Self titled',
+  //       'Vessel',
+  //     ],
+  //       datasets: [{
+  //         label: 'Votos',
+  //         backgroundColor: ['rgb(233, 49, 49)',
+  //        'rgb(231, 228, 57)',
+  //         'rgb(50, 25, 194)',
+  //          'rgb(10, 10, 10)',
+  //         'rgb(40, 255, 50)',
+  //         'rgb(40, 255, 50)'],
 
-//     const data3 = {
-//       labels:  [
-//       'Trench',
-//       'blurryface',
-//       'Scaled and icy',
-//       'Regional at best',
-//       'Self titled',
-//       'Vessel',
-//     ],
-//       datasets: [{
-//         label: 'Votos', 
-//         backgroundColor: ['rgb(233, 49, 49)',
-//        'rgb(231, 228, 57)',
-//         'rgb(50, 25, 194)',
-//          'rgb(10, 10, 10)',
-//         'rgb(40, 255, 50)',
-//         'rgb(40, 255, 50)'],
-        
-//         data: [0, 0, 0, 0, 0, 0],
-//       }
-//       ]
-//     };
-//     const config2 = {
-//       type: 'bar',
-//       data: data3,
-//       options: {}
-//     };
-//     const myChart3 = new Chart(
-//       document.getElementById('myChart3'),
-//       config2
-//     );
+  //         data: [0, 0, 0, 0, 0, 0],
+  //       }
+  //       ]
+  //     };
+  //     const config2 = {
+  //       type: 'bar',
+  //       data: data3,
+  //       options: {}
+  //     };
+  //     const myChart3 = new Chart(
+  //       document.getElementById('myChart3'),
+  //       config2
+  //     );
 
+  function cadastrar2() {
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
 
+    var seleVideoVar = album.value;
 
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar2", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
 
-    function cadastrar2() {
-        
-
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
-       
-        var seleVideoVar= album.value
-
-
-
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar2", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-            
-               seleVideoServer: seleVideoVar,
-
-            })
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
-            
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        
-        });
-
-        return false;
-    }
-
-    
-
-
-    let proximaAtualizacao;
-    let proximaAtualizacao2;
-window.onload = obterDadosGrafico(1);
-window.onload = obterDadosGrafico2(1);
-b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
-
-
-// verificar_autenticacao();
-
-
-// O gráfico é construído com três funções:
-// 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-// 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-// 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-// Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-// para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-// A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-//     Para ajustar o "select", ajuste o comando sql em src/models
-function obterDadosGrafico(idUsuario) {
-
-
-    if (proximaAtualizacao != undefined) {
-        clearTimeout(proximaAtualizacao);
-    }
-
-    fetch(`/medidas/ultimas`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                resposta.reverse();
-
-                plotarGrafico(resposta, idUsuario);
-                
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-        }
+        seleVideoServer: seleVideoVar,
+      }),
     })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-}
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 
+    return false;
+  }
 
+  let proximaAtualizacao;
+  let proximaAtualizacao2;
+  window.onload = obterDadosGrafico(1);
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
-function obterDadosGrafico2(idUsuario) {
+  // verificar_autenticacao();
 
+  // O gráfico é construído com três funções:
+  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
 
-if (proximaAtualizacao2 != undefined) {
-    clearTimeout(proximaAtualizacao2);
-}
+  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
 
-fetch(`/requisitar/requisitar`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (resposta) {
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+  function obterDadosGrafico(idUsuario) {
+    if (proximaAtualizacao != undefined) {
+      clearTimeout(proximaAtualizacao);
+    }
+
+    fetch(`/medidas/ultimas`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
             resposta.reverse();
 
-            plotarGrafico2(resposta, idUsuario);
-            
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
+            plotarGrafico(resposta, idUsuario);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
+
+  function obterDadosGrafico2(idAlbum) {
+    if (proximaAtualizacao2 != undefined) {
+      clearTimeout(proximaAtualizacao2);
     }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
 
+    fetch(`/requisitar/requisitar`, { cache: "no-store" })
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (resposta) {
+            console.log("Dados recebidos: ", resposta);
+            resposta.reverse();
 
+            plotarGrafico2(resposta, idAlbum);
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
 
-
-// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-// A função *plotarGrafico* também invoca a função *atualizarGrafico*
-function plotarGrafico(resposta, idUsuario) {
-    console.log('iniciando plotagem do gráfico...');
+  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
+  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+  function plotarGrafico(resposta, idUsuario) {
+    console.log("iniciando plotagem do gráfico...");
 
     var dados = {
-        labels: [],
-        datasets: [
-            
-                
-               
-               {
-                yAxisID: 'y-temperatura',
-                label: 'Numero de pessoas cadastradas',
-                borderColor: '#FFF',
-                backgroundColor: '#32b9cd8f',
-                fill: true,
-                data: []
-            }
-        ]
+      labels: [],
+      datasets: [
+        {
+          yAxisID: "y-temperatura",
+          label: "Numero de pessoas cadastradas",
+          borderColor: "#FFF",
+          backgroundColor: "#32b9cd8f",
+          fill: true,
+          data: [],
+        },
+      ],
     };
 
     for (i = 0; i < resposta.length; i++) {
-        var registro = resposta[i];
-        dados.labels.push(registro.momento_grafico);
-        dados.datasets[0].data.push(registro.temperatura);
+      var registro = resposta[i];
+      dados.labels.push(registro.momento_grafico);
+      dados.datasets[0].data.push(registro.temperatura);
     }
 
-    console.log(JSON.stringify(dados));
-
-    var ctx = myChart.getContext('2d');
+    var ctx = document.getElementById("myChart").getContext("2d");
     window.grafico_linha = Chart.Line(ctx, {
-        data: dados,
-        options: {
-            responsive: true,
-            animation: { duration: 500 },
-            hoverMode: 'index',
-            stacked: false,
-            title: {
-                display: false,
-                text: 'Dados capturados'
+      data: dados,
+      options: {
+        responsive: true,
+        animation: { duration: 500 },
+        hoverMode: "index",
+        stacked: false,
+        title: {
+          display: false,
+          text: "Dados capturados",
+        },
+        scales: {
+          yAxes: [
+            {
+              type: "linear",
+              display: true,
+              position: "left",
+              id: "y-temperatura",
+              ticks: {
+                beginAtZero: true,
+                max: 100,
+                min: 0,
+              },
             },
-            scales: {
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-temperatura',
-                    ticks: {
-                        beginAtZero: true,
-                        max: 100,
-                        min: 0
-                    }
-                }, {
-                    type: 'linear',
-                    display: false,
-                    position: 'right',
-                    id: 'y-umidade',
-                    ticks: {
-                        beginAtZero: true,
-                        max: 100,
-                        min: 0
-                    },
+            {
+              type: "linear",
+              display: false,
+              position: "right",
+              id: "y-umidade",
+              ticks: {
+                beginAtZero: true,
+                max: 100,
+                min: 0,
+              },
 
-                    gridLines: {
-                        drawOnChartArea: false,
-                    },
-                }],
-            }
-        }
+              gridLines: {
+                drawOnChartArea: false,
+              },
+            },
+          ],
+        },
+      },
     });
 
     setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
+    obterDadosGrafico2(1);
+  }
 
-   
+  function plotarGrafico2(resposta, idAlbum) {
+    console.log("iniciando plotagem do gráfico...");
 
-}
+    /*
+    
+        {
+          yAxisID: "y-blurryface",
+          label: "blurryface",
+          borderColor: "#32B9CD",
+          backgroundColor: "#32B9CD",
+          fill: true,
+          data: [],
+        },
+        {
+          yAxisID: "y-scaled and icy",
+          label: "scaled and icy",
+          borderColor: "#32B9CD",
+          backgroundColor: "#32B9CD",
+          fill: true,
+          data: [],
+        },
+        {
+          yAxisID: "y-regional at best",
+          label: "regional at best",
+          borderColor: "#32B9CD",
+          backgroundColor: "#32B9CD",
+          fill: true,
+          data: [],
+        },
+        {
+          yAxisID: "y-self-titled",
+          label: "self-titled",
+          borderColor: "#32B9CD",
+          backgroundColor: "#32B9CD",
+          fill: true,
+          data: [],
+        },
+        {
+          yAxisID: "y-vessel",
+          label: "vessel",
+          borderColor: "#32B9CD",
+          backgroundColor: "#32B9CD",
+          fill: true,
+          data: [],
+        },
+    */
 
-
-function plotarGrafico2(resposta, idUsuario) {
-    console.log('iniciando plotagem do gráfico...');
-
-    var dados = {
-        labels: [],
-        datasets: [
-            
-                
-               
-               {
-                yAxisID: 'y-trench',
-                label: 'trench',
-                borderColor: 'yellow',
-                backgroundColor: 'yellow',
-                fill: true,
-                data: []
-            },
-            {
-                yAxisID: 'y-blurryface',
-                label: 'blurryface',
-                borderColor: 'black',
-                backgroundColor: 'black',
-                fill: true,
-                data: []
-            },
-            {
-                yAxisID: 'y-scaled and icy',
-                label: 'scaled and icy',
-                borderColor: 'pink',
-                backgroundColor: 'pink',
-                fill: true,
-                data: []
-            },
-            {
-                yAxisID: 'y-regional at best',
-                label: 'regional at best',
-                borderColor: 'pink',
-                backgroundColor: 'pink',
-                fill: true,
-                data: []
-            },
-            {
-                yAxisID: 'y-self-titled',
-                label: 'self-titled',
-                borderColor: 'pink',
-                backgroundColor: 'pink',
-                fill: true,
-                data: []
-            },
-            {
-                yAxisID: 'y-vessel',
-                label: 'vessel',
-                borderColor: 'pink',
-                backgroundColor: 'pink',
-                fill: true,
-                data: []
-            },
-
-        ]
+    var dados2 = {
+      labels: [],
+      datasets: [
+        {
+          backgroundColor:['white','white','#469BD2','#c8417e','black','yellow'],
+          label: "Album",
+          data: [],
+        },
+      ],
     };
 
-    for (i = 0; i < resposta.length; i++) {
-        var registro = resposta[i];
-        if(registro.nome== 'trench'){
-        dados.datasets[0].data.push(registro.voto)}
-        else if(registro.nome== 'blurryface'){
-        dados.datasets[1].data.push(registro.voto)
-    }    else if(registro.nome== 'scaled and icy'){
-        dados.datasets[2].data.push(registro.voto)
-    }
-    else if(registro.nome== 'regional at best'){
-        dados.datasets[3].data.push(registro.voto)
-    }
-    else if(registro.nome== 'self-titled'){
-        dados.datasets[4].data.push(registro.voto)
-    }else if(registro.nome== 'vessel'){
-        dados.datasets[5].data.push(registro.voto)
-    }
-
+    for (var i = 0; i < resposta.length; i++) {
+      var registro = resposta[i];
+      if (registro.nome == "trench") {
+        dados2.datasets[0].data.push(registro.voto);
+      } else if (registro.nome == "blurryface") {
+        dados2.datasets[0].data.push(registro.voto);
+      } else if (registro.nome == "scaled and icy") {
+        dados2.datasets[0].data.push(registro.voto);
+      } else if (registro.nome == "regional at best") {
+        dados2.datasets[0].data.push(registro.voto);
+      } else if (registro.nome == "self-titled") {
+        dados2.datasets[0].data.push(registro.voto);
+      } else if (registro.nome == "vessel") {
+        dados2.datasets[0].data.push(registro.voto);
+      }
+      dados2.labels.push(registro.nome);
     }
 
-    console.log(JSON.stringify(dados));
+    console.log("dados2", dados2);
 
-    var ctx = myChart2.getContext('2d');
+    var ctx = document.getElementById("myChart2").getContext("2d");
     window.grafico_linha2 = Chart.Bar(ctx, {
-        data: dados,
-        options: {
-            responsive: true,
-            animation: { duration: 500 },
-            hoverMode: 'index',
-            stacked: false,
-            title: {
-                display: false,
-                text: 'Dados capturados'
+      data: dados2,
+      options: {
+        responsive: true,
+        animation: { duration: 500 },
+        hoverMode: "index",
+        stacked: false,
+        title: {
+          display: false,
+          text: "Dados capturados",
+        },
+        scales: {
+          yAxes: [
+            {
+              type: "linear",
+              display: true,
+              position: "left",
+              id: "y-temperatura",
+              ticks: {
+                beginAtZero: true,
+                max: 100,
+                min: 0,
+              },
             },
-            scales: {
-                yAxes: [{
-                    type: 'linear',
-                    display: true,
-                    position: 'left',
-                    id: 'y-temperatura',
-                    ticks: {
-                        beginAtZero: true,
-                        max: 100,
-                        min: 0
-                    }
-                }, {
-                    type: 'linear',
-                    display: false,
-                    position: 'right',
-                    id: 'y-umidade',
-                    ticks: {
-                        beginAtZero: true,
-                        max: 100,
-                        min: 0
-                    },
+            {
+              type: "linear",
+              display: false,
+              position: "right",
+              id: "y-umidade",
+              ticks: {
+                beginAtZero: true,
+                max: 100,
+                min: 0,
+              },
 
-                    gridLines: {
-                        drawOnChartArea: false,
-                    },
-                }],
-            }
-        }
+              gridLines: {
+                drawOnChartArea: false,
+              },
+            },
+          ],
+        },
+      },
     });
 
-    setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+    // setTimeout(() => atualizarGrafico2(idUsuario, dados2), 2000);
+  }
 
-   
+  // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+  // buscando a última medida inserida em tabela contendo as capturas,
 
-}
-
-// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-// buscando a última medida inserida em tabela contendo as capturas, 
-
-//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-//     Para ajustar o "select", ajuste o comando sql em src/models
-function atualizarGrafico(idUsuario, dados) {
-
-    fetch(`/medidas/tempo-real`, { cache: 'no-store' }).then(function (response) {
+  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+  //     Para ajustar o "select", ajuste o comando sql em src/models
+  function atualizarGrafico(idUsuario, dados) {
+    fetch(`/medidas/tempo-real`, { cache: "no-store" })
+      .then(function (response) {
         if (response.ok) {
-            response.json().then(function (novoRegistro) {
-
-                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                console.log(`Dados atuais do gráfico: ${dados}`);
-
-                // tirando e colocando valores no gráfico
-                dados.labels.shift(); // apagar o primeiro
-
-                // tirando e colocando valores no gráfico
-                dados.labels.shift(); // apagar o primeiro
-                dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
-
-
-                dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-                dados.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                window.grafico_linha.update();
-
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
-            });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao = setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
-        }
-    })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-
-}
-
-function atualizarGrafico2(idUsuario, dados) {
-
-fetch(`/requisitar/requisitar`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro) {
-
+          response.json().then(function (novoRegistro) {
             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
             console.log(`Dados atuais do gráfico: ${dados}`);
 
@@ -562,126 +479,138 @@ fetch(`/requisitar/requisitar`, { cache: 'no-store' }).then(function (response) 
 
             // tirando e colocando valores no gráfico
             dados.labels.shift(); // apagar o primeiro
-            
+            dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
 
+            dados.datasets[0].data.shift(); // apagar o primeiro de temperatura
+            dados.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-            dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-            dados.datasets[0].data.push(novoRegistro[0].ab); // incluir uma nova medida de temperatura
-
-            dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-            dados.datasets[0].data.push(novoRegistro[0].bc); // incluir uma nova medida de temperatura
-
-            window.grafico_linha2.update();
+            window.grafico_linha.update();
 
             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
-    }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
+            proximaAtualizacao = setTimeout(
+              () => atualizarGrafico(idUsuario, dados),
+              2000
+            );
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+          // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+          proximaAtualizacao = setTimeout(
+            () => atualizarGrafico(idUsuario, dados),
+            2000
+          );
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados p/ gráfico: ${error.message}`
+        );
+      });
+  }
 
-}
+  // function atualizarGrafico2(idUsuario, dados2) {
 
+  // fetch(`/requisitar/requisitar`, { cache: 'no-store' }).then(function (response) {
+  //     if (response.ok) {
+  //         response.json().then(function (novoRegistro) {
 
-// <option value="2">Blurryface</option>
-//                     <option value="1">Trench</option>
+  //             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+  //             console.log(`Dados atuais do gráfico: ${dados}`);
 
-//                     <option value="6">Vessel</option>
+  //             // tirando e colocando valores no gráfico
+  //             dados.labels.shift(); // apagar o primeiro
 
-//                     <option value="3">Scaled and icy</option>
+  //             // tirando e colocando valores no gráfico
+  //             dados.labels.shift(); // apagar o primeiro
 
-//                     <option value="5">Self titled</option>
+  //             dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+  //             dados.datasets[0].data.push(novoRegistro[0].ab); // incluir uma nova medida de temperatura
 
-//                     <option value="4">Regional at best</option>
+  //             dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
+  //             dados.datasets[0].data.push(novoRegistro[0].bc); // incluir uma nova medida de temperatura
 
-// <!-- <option value="1">Blurryface</option>
-//                     <option value="2">Trench</option>
+  //             window.grafico_linha2.update();
 
-//                     <option value="3">Vessel</option>
+  //             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+  //             proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+  //         });
+  //     } else {
+  //         console.error('Nenhum dado encontrado ou erro na API');
+  //         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+  //         proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+  //     }
+  // })
+  //     .catch(function (error) {
+  //         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+  //     });
 
-//                     <option value="4">Scaled and icy</option>
+  // }
 
-//                     <option value="5">Self titled</option>
+  // <option value="2">Blurryface</option>
+  //                     <option value="1">Trench</option>
 
-//                     <option value="6">Regional at best</option> -->
+  //                     <option value="6">Vessel</option>
 
+  //                     <option value="3">Scaled and icy</option>
 
-function sele() {
-    var seleVideo = album.value
+  //                     <option value="5">Self titled</option>
+
+  //                     <option value="4">Regional at best</option>
+
+  // <!-- <option value="1">Blurryface</option>
+  //                     <option value="2">Trench</option>
+
+  //                     <option value="3">Vessel</option>
+
+  //                     <option value="4">Scaled and icy</option>
+
+  //                     <option value="5">Self titled</option>
+
+  //                     <option value="6">Regional at best</option> -->
+
+  function sele() {
+    var seleVideo = album.value;
 
     if (seleVideo == "1") {
-        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/UOUBW8bkjQ4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-
+      videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/UOUBW8bkjQ4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else if (seleVideo == "6") {
-
-        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/92XVwY54h5k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-
-
+      videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/92XVwY54h5k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else if (seleVideo == "3") {
-
-        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/_FcWwwOWgk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-
-
+      videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/_FcWwwOWgk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else if (seleVideo == "5") {
-
-        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/2JE8R9KfJwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-
-
+      videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/2JE8R9KfJwI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else if (seleVideo == "4") {
-
-        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/-2-gwRvrdnY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-
-
+      videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/-2-gwRvrdnY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     } else if (seleVideo == "2") {
-
-        videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-
-
+      videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     }
+  }
 
+  // function votar() {
 
+  // var seleVideo = album.value
+  // var database = require("../../src/database/config.js")
+  // if (seleVideo == "1") {
 
-}
+  // var instrucao = `
+  //     INSERT INTO votos VALUES ('1');
+  // `;
+  // console.log("Executando a instrução SQL: \n" + instrucao);
+  // return database.executar(instrucao);
+  // }
+  // }
 
+  // fetch("/usuarios/votar", {
+  //         method: "POST",
+  //         headers: {
+  //             "Content-Type": "application/json"
+  //         },
+  //         body: JSON.stringify({
+  //             // crie um atributo que recebe o valor recuperado aqui
+  //             // Agora vá para o arquivo routes/usuario.js
 
+  //             seleServer: seleVideoVar,
 
-// function votar() {
-
-// var seleVideo = album.value
-// var database = require("../../src/database/config.js")
-// if (seleVideo == "1") {
-    
-// var instrucao = `
-//     INSERT INTO votos VALUES ('1');
-// `;
-// console.log("Executando a instrução SQL: \n" + instrucao);
-// return database.executar(instrucao);
-// }
-// }
-
-// fetch("/usuarios/votar", {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             // crie um atributo que recebe o valor recuperado aqui
-//             // Agora vá para o arquivo routes/usuario.js
-           
-//             seleServer: seleVideoVar,
-           
-
-//         })
-//     })
-
-
-
-
-
+  //         })
+  //     })
 </script>
