@@ -30,7 +30,7 @@
      
 
       <div class="sair" onclick="limparSessao()">
-        <img src="img/icons8-logout-arredondado-para-baixo-100.png" alt="">
+        <img src="img/sair.png" alt="">
       </div>
     </div>
 
@@ -110,10 +110,10 @@
         </b>
       </div>
     
-    
+  
   </div>
 
-
+  <div id="resultado"></div>
   </div>
 
   <div class="grafico">
@@ -256,6 +256,7 @@ document.getElementById('popupVoto').style.display= 'block'
   let proximaAtualizacao;
   let proximaAtualizacao2;
   window.onload = obterDadosGrafico(1);
+  
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
   // verificar_autenticacao();
@@ -394,6 +395,7 @@ document.getElementById('popupVoto').style.display= 'block'
 
     setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
     obterDadosGrafico2(1);
+    mostrarMaior();
   }
 var totalVotos=0
   var album0 = 0
@@ -611,6 +613,12 @@ vessel.innerHTML= album5
       videos.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     }
   }
+function mostrarMaior(){
+if(album0 > album1 && album0 > album2 && album0 > album3 && album0 > album4 && album0 > album5){
+resultado.innerHTML=`O albúm mais votado até agora é o Trench com ${album0} votos`
 
+}
+
+}
 
 </script>
