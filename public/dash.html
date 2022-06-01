@@ -21,15 +21,16 @@
 <body onload="validarSessao(), atualizacaoPeriodica()">
   <div class="janela">
     <div class="left-navbar">
-      <img src="/img/logo.png" style="height: 150px" />
-
       <div class="welcome">
-        <h3>Seja bem vindo</h3>
+        <h3>Bem vindo</h3>
         <h3><span id="b_usuario">usuário</span>!</h3>
       </div>
+      <img src="/img/logo.png" style="height: 150px" />
+
+     
 
       <div class="sair" onclick="limparSessao()">
-        <h3>Sair</h3>
+        <img src="img/icons8-logout-arredondado-para-baixo-100.png" alt="">
       </div>
     </div>
 
@@ -50,10 +51,7 @@
           <option value="4">Regional at best</option>
         </select>
         <div class="video" id="videos">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/HDI9inno86U" title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+          <img src="img/21-Pilots-logo.png" alt="">
         </div>
         <button onclick="cadastrar2()" style="height: 40px">Votar</button>
         <div id="popupVoto" class="pop"> <img src="img/Vg6.gif" style="width: 130px;" > <p> Voto realizado com sucesso</p></div>
@@ -61,7 +59,7 @@
     </div>
   </div>
   <div class="grafico">
-    <h1>Quantitades de votos até agora:</h1>
+    <h1>Quantidades de votos até agora:</h1>
     <div class="grafico1">
 
       <canvas id="myChart2"></canvas>

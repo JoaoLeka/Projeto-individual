@@ -1,6 +1,9 @@
 body{
     margin: 0;
-    background-color: black;
+    background-image: url('../img/twenty-one-pilots-back.jpg');
+background-size: 100%;
+background-repeat: no-repeat;
+background-attachment: fixed;
     display:inline-block;
 overflow-x: hidden
 }
@@ -17,12 +20,18 @@ overflow-x: hidden
     justify-content: space-evenly;
     align-items: center;
     border-right: 2px solid #c8417e;
-    background-color: #212124;
+    background-color: #212124e0;
     color: #c8417e;
+    padding: 0;
+  }
+
+  .left-navbar{
+    margin-top: -20;
   }
 .welcome{
   display: flex;
   flex-direction: column;
+  
 }
 .welcome h3{
   margin: 0;
@@ -38,12 +47,13 @@ cursor: pointer;
     
   }
   .selecao{
-    background-color: #212124;
+    background-color: #212124e0;
     height: 500px;
 width: 75%;
 margin-left: 310px;
 margin-top: 20px;
 border: 2px solid #c8417e;
+color: #c8417e;
   }
 
   .selecao .voto{
@@ -87,10 +97,13 @@ cursor: pointer;
       flex-direction: column;
       margin-top: 40px;
     }
+    .video img{
+      width: 560px;
+    }
 
 
     .grafico{
-      background-color: #212124;
+      background-color: #212124e0;
       height: 600px;
   width: 75%;
   color: #c8417e;
