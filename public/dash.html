@@ -56,6 +56,7 @@
             allowfullscreen></iframe>
         </div>
         <button onclick="cadastrar2()" style="height: 40px">Votar</button>
+        <div id="popupVoto" class="pop"> <img src="img/Vg6.gif" style="width: 130px;" > <p> Voto realizado com sucesso</p></div>
       </div>
     </div>
   </div>
@@ -234,8 +235,10 @@
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
-        
-        window.location= "dash.html"
+     
+        popup()
+        setTimeout(atualizar,2000)
+    
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -244,6 +247,14 @@
     return false;
   }
 
+  function popup(){
+document.getElementById('popupVoto').style.display= 'block'
+
+  }
+
+  function atualizar(){
+          window.location= "dash.html"
+        }
   let proximaAtualizacao;
   let proximaAtualizacao2;
   window.onload = obterDadosGrafico(1);

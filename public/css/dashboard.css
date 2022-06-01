@@ -176,7 +176,26 @@ justify-content: space-between;
     height:40vh; 
     width:37vw
 }
+.pop{
+  display: none;
+  font-size: 50px;
+  position: fixed;
+  width: 590px;
+  height: 300px;
+  background-color: #212124;
+  border: 2px solid #ee70a9;
+  color: #c8417e;
+  padding: 0;
+border-radius: 10px;
+  
+}
+.pop img{
+  margin-left: 210px;
+}
+.pop p{
+margin-left: 17px;
 
+}
 
 ::-webkit-scrollbar{
   width: 10px;
