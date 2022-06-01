@@ -69,45 +69,45 @@
 
       <div class="trench">
         <b>
-        <p>Trench</p> <br>
-        <span>0</span>
+        <p>Vessel</p> <br>
+        <span id="vessel">0</span>
       </b>
       </div>
       <div class="trench">
         <b>
-          <p>Trench</p> <br>
-          <span>0</span>
+          <p>Self-titled</p> <br>
+          <span id="sel" class="span2">0</span>
         </b>
         
       </div>
       <div class="trench">
         <b>
-          <p>Trench</p> <br>
-          <span>0</span>
+          <p>RAB</p> <br>
+          <span id="rab" class="span3">0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>SAI</p> <br>
+          <span id="sai" class="span4">0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Blurryface</p> <br>
+          <span id="blurry" class="span5">0</span>
         </b>
       </div>
       <div class="trench">
         <b>
           <p>Trench</p> <br>
-          <span>0</span>
+          <span id="trench" class="span6">0</span>
         </b>
       </div>
       <div class="trench">
         <b>
-          <p>Trench</p> <br>
-          <span>0</span>
-        </b>
-      </div>
-      <div class="trench">
-        <b>
-          <p>Trench</p> <br>
-          <span>0</span>
-        </b>
-      </div>
-      <div class="trench">
-        <b>
-          <p>Trench</p> <br>
-          <span>0</span>
+          <p>Total</p> <br>
+          <span id="total" class="span7">0</span>
         </b>
       </div>
     
@@ -234,6 +234,8 @@
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
+        
+        window.location= "dash.html"
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -384,7 +386,7 @@
     setTimeout(() => atualizarGrafico(idUsuario, dados), 2000);
     obterDadosGrafico2(1);
   }
-
+var totalVotos=0
   var album0 = 0
   var album1 = 0
   var album2 = 0
@@ -413,25 +415,33 @@
       if (registro.nome == "trench") {
         dados2.datasets[0].data.push(registro.voto);
         album0 = registro.voto
-
+trench.innerHTML= album0
       } else if (registro.nome == "blurryface") {
         dados2.datasets[0].data.push(registro.voto);
         album1 = registro.voto
+        blurry.innerHTML= album1
       } else if (registro.nome == "scaled and icy") {
         dados2.datasets[0].data.push(registro.voto);
         album2 = registro.voto
+        sai.innerHTML= album2
       } else if (registro.nome == "regional at best") {
         dados2.datasets[0].data.push(registro.voto);
         album3 = registro.voto
-
+rab.innerHTML= album3
       } else if (registro.nome == "self-titled") {
         dados2.datasets[0].data.push(registro.voto);
         album4 = registro.voto
+        sel.innerHTML= album4
+        
       } else if (registro.nome == "vessel") {
         dados2.datasets[0].data.push(registro.voto);
         album5 = registro.voto
+vessel.innerHTML= album5
+
       }
       dados2.labels.push(registro.nome);
+      totalVotos= album0+album1+album2+album3+album4+album5
+      total.innerHTML= totalVotos
     }
 
     console.log("dados2", dados2);
@@ -546,29 +556,25 @@
   //         response.json().then(function (novoRegistro) {
 
   //             console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-  //             console.log(`Dados atuais do gráfico: ${dados}`);
+  //             console.log(`Dados atuais do gráfico: ${dados2}`);
 
   //             // tirando e colocando valores no gráfico
   //             dados.labels.shift(); // apagar o primeiro
 
-  //             // tirando e colocando valores no gráfico
-  //             dados.labels.shift(); // apagar o primeiro
+           
 
   //             dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-  //             dados.datasets[0].data.push(novoRegistro[0].ab); // incluir uma nova medida de temperatura
-
-  //             dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
-  //             dados.datasets[0].data.push(novoRegistro[0].bc); // incluir uma nova medida de temperatura
+  //             dados.datasets[0].data.push(novoRegistro[0].voto); // incluir uma nova medida de temperatura
 
   //             window.grafico_linha2.update();
 
   //             // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-  //             proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+  //             proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados2), 2000);
   //         });
   //     } else {
   //         console.error('Nenhum dado encontrado ou erro na API');
   //         // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-  //         proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados), 2000);
+  //         proximaAtualizacao2 = setTimeout(() => atualizarGrafico2(idUsuario, dados2), 2000);
   //     }
   // })
   //     .catch(function (error) {
@@ -577,27 +583,7 @@
 
   // }
 
-  // <option value="2">Blurryface</option>
-  //                     <option value="1">Trench</option>
-
-  //                     <option value="6">Vessel</option>
-
-  //                     <option value="3">Scaled and icy</option>
-
-  //                     <option value="5">Self titled</option>
-
-  //                     <option value="4">Regional at best</option>
-
-  // <!-- <option value="1">Blurryface</option>
-  //                     <option value="2">Trench</option>
-
-  //                     <option value="3">Vessel</option>
-
-  //                     <option value="4">Scaled and icy</option>
-
-  //                     <option value="5">Self titled</option>
-
-  //                     <option value="6">Regional at best</option> -->
+  
 
   function sele() {
     var seleVideo = album.value;
