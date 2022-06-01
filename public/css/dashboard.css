@@ -180,6 +180,7 @@ justify-content: space-between;
   display: none;
   font-size: 50px;
   position: fixed;
+  z-index: 10;
   width: 590px;
   height: 300px;
   background-color: #212124;
