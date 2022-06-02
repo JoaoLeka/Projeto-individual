@@ -133,6 +133,12 @@ button a{
     font-weight: 500;
     font-size: 20px;
   }
+  select{
+    background-color: #21212400;
+    height: 30px;
+width: 20%;
+border: 2px solid #c8417e;
+  }
 
   .footer .container{
     margin: 0;

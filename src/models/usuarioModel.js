@@ -20,32 +20,33 @@ function entrar(email, senha) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-var cadastro= 0;
-var cadastroLista3= [];
+
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-function cadastrar(nome, email, senha) {
-    cadastro= cadastro + 1
-    cadastroLista3.push(cadastro)
-    var maior= 0
-for(var i=0; i <cadastroLista3.length; i++){
-    if(cadastroLista3[i]> maior){
-        maior= cadastroLista3[i]
-    }
-}
+function cadastrar(nome, email, senha, seleMembro) {
+  
+
     
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha, seleMembro);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
+    if(seleMembro== "1"){
     var instrucao = `
-        INSERT INTO usuario (nome, email, senha, n_cadastro) VALUES ('${nome}', '${email}', '${senha}','${maior }');
+        INSERT INTO usuario (nome, email, senha, integrante_favorito) VALUES ('${nome}', '${email}', '${senha}','Tyler Joseph');
         
     `;
        
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
-
+} else if(seleMembro== "2"){
+    var instrucao = `
+        INSERT INTO usuario (nome, email, senha, integrante_favorito) VALUES ('${nome}', '${email}', '${senha}','Josh Dun');
+        
+    `;
+       
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);}
 }
 
 function cadastrar2(seleVideo) {

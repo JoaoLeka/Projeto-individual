@@ -49,7 +49,13 @@
 
             Confirmar senha: <br>
             <input id="confirmar_senha" type="password" placeholder="Confirmar senha">
+Escolha seu membro da banda favorito:
+<select id="membro">
 
+<option value="0">Escolha</option>
+<option value="1">Tyler Joseph</option>
+<option value="2">Josh Dun</option>
+</select>
             <button onclick="cadastrar()"> Cadastrar </button> 
 
             <div id="div_aguardar" class="loading-div">
@@ -91,7 +97,7 @@
         var emailVar = email.value;
         var senhaVar = senha.value;
         var confirmacaoSenhaVar = confirmar_senha.value;
-        
+        var seleMembroVar= membro.value
 
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "" ||  confirmacaoSenhaVar == "") {
@@ -143,7 +149,7 @@
                 nomeServer: nomeVar,
                 emailServer: emailVar,
                 senhaServer: senhaVar,
-               
+               seleMembroServer: seleMembroVar,
 
             })
         }).then(function (resposta) {

@@ -8,11 +8,10 @@ idUsuario int primary key auto_increment,
 nome varchar(45),
 email varchar(45),
 senha varchar(45),
-n_cadastro int,
-momento_cadastro datetime default current_timestamp
+integrante_favorito varchar(45)
 );
-
-
+select*from usuario;
+select integrante_favorito as nome, count(integrante_favorito) as voto from usuario group by integrante_favorito ;
 
 select count(idUsuario) as numeroDeCadastro from usuario;
 
