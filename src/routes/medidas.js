@@ -21,5 +21,8 @@ router.get("/tempo-real2", function (req, res) {
 router.get("/requisitar", function (req, res) {
     medidaController.requisitar(req, res);
 });
+router.get("/requisitarMembro", function (req, res) {
+    medidaController.requisitarMembro(req, res);
+});
 
 module.exports = router;

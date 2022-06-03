@@ -100,10 +100,20 @@ function requisitar() {
     return database.executar(instrucao);
 }
 
+function requisitarMembro() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function requisitar()");
+    var instrucao = `
+    select integrante_favorito as membro, count(integrante_favorito) as voto2 from usuario group by integrante_favorito ;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     buscarMedidasEmTempoReal2,
     buscarUltimasMedidas2,
-    requisitar
+    requisitar,
+    requisitarMembro
 }
