@@ -20,10 +20,12 @@
 
 <body onload="validarSessao(), atualizacaoPeriodica()">
   <div class="janela">
-    <div class="left-navbar">
+    <img id="hamburguer" class="hamburguer" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menu()">
+    <div id="nav" class="left-navbar">
       <div class="welcome">
-        <h3>Bem vindo</h3>
-        <h3><span id="b_usuario">usuário</span>!</h3>
+        <h3>Bem vindo
+        <span id="b_usuario">usuário</span>!
+      </h3>
       </div>
       <img src="/img/logo.png" style="height: 150px" />
 
@@ -106,7 +108,7 @@
       <div class="trench">
         <b>
           <p>Total</p> <br>
-          <span id="total" class="span7">0</span>
+          <span id="total" class="span3">0</span>
         </b>
       </div>
     
@@ -117,11 +119,33 @@
   </div>
 
   <div class="grafico">
-
+    <h1>integrante da banda favorito dos fãs:</h1>
     <div>
       <canvas id="myChart"></canvas>
     </div>
+    <h3>Seu integrante da banda favorito é</h3>
+    <h3><span id="b_integrante">usuário</span></h3>
+    <div class="numeros">
+    <div class="trench">
+      <b>
+        <p>Josh</p> <br>
+        <span id="josh" class="span3">0</span>
+      </b>
+    </div>
+    <div class="trench">
+      <b>
+        <p>Tyler</p> <br>
+        <span id="tyler" class="span3">0</span>
+      </b>
+    </div>
 
+    <div class="trench">
+      <b>
+        <p>Total</p> <br>
+        <span id="totalMembroSpan" class="span3">0</span>
+      </b>
+    </div>
+    </div>
   </div>
 </body>
 
@@ -258,7 +282,7 @@ document.getElementById('popupVoto').style.display= 'block'
   window.onload = obterDadosGrafico(1);
   
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-
+b_integrante.innerHTML= sessionStorage.INTEGRANTE;
   // verificar_autenticacao();
 
   // O gráfico é construído com três funções:
@@ -272,6 +296,22 @@ document.getElementById('popupVoto').style.display= 'block'
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
+  var ham= document.getElementById("hamburguer");
+  var classes= ham.classList
+  function menu(){
+    ham.addEventListener('click', function() {
+  const result = classes.toggle("flex");
+
+  if (result) {
+    nav.style.display="none"
+  } else {
+    nav.style.display="flex"
+  }
+})
+
+
+
+  }
   function obterDadosGrafico(idUsuario) {
     if (proximaAtualizacao != undefined) {
       clearTimeout(proximaAtualizacao);
@@ -329,6 +369,7 @@ document.getElementById('popupVoto').style.display= 'block'
 
   var membro0=0
   var membro1=0
+  var totalMembro=0
   var membroLista= []
   function plotarGrafico(resposta, idUsuario) {
     console.log("iniciando plotagem do gráfico...");
@@ -349,11 +390,15 @@ document.getElementById('popupVoto').style.display= 'block'
     if(registro.membro=="Tyler Joseph"){
       dados.datasets[0].data.push(registro.voto2);
       membro0=registro.voto2
+      tyler.innerHTML= membro0
     } else if(registro.membro=="Josh Dun"){
       dados.datasets[0].data.push(registro.voto2);
       membro1=registro.voto2
+      josh.innerHTML= membro1
     }
       dados.labels.push(registro.membro);
+      totalMembro=membro0+membro1
+      totalMembroSpan.innerHTML= totalMembro
     }
 
     membroLista.push(membro0, membro1)

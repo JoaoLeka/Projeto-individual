@@ -98,18 +98,6 @@ function cadastrar2(seleVideo) {
 
 
 
-// function votar(sele){
-
-//     if (sele == "1") {
-//     var instrucao = `
-//         INSERT INTO votos VALUES ('1');
-        
-//     `;
-       
-//     console.log("Executando a instrução SQL: \n" + instrucao);
-//     return database.executar(instrucao);
-// }
-// }
 
 
 
