@@ -10,6 +10,7 @@
     <link href="fontawesome/css/all.css" rel="stylesheet">
     <script src="./js/funcoes.js"></script>
     <link rel="icon" href="img/21-Pilots-logo.png">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 </head>
 
 <body>
@@ -25,14 +26,17 @@
             <span id="mensagem_erro"></span>
         </div>
     </div>
+    <img class="ned" src="img/ned.gif" alt="">
     <div class="card">
         <div class="header">
         <img src="img/logo.png" >
         <div class="alt">
             <h1>Não tem uma conta?</h1> <h1> Faça seu cadastro: </h1><br>
             <a href="cadastro.html"> <button style="width: 200px;">Cadastro </button></a>
-        </div>            
+        </div>      
+              
     </div>
+    
         <div class="container">
             <h2>Bem vindo de volta!</h2>
             
@@ -42,7 +46,7 @@
 
             Senha: <br>
             <input id="senha" type="password" placeholder="Senha">
-
+            <span onclick="olhar()" class="lnr lnr-eye"></span>
             
 
         <button style="width:100px;" onclick="entrar()">Entrar</button>
@@ -155,5 +159,14 @@
     function sumirMensagem() {
         cardErro.style.display = "none"
     }
+    function olhar(){
+     
+     if(document.getElementById('senha').type=="password"){
+       document.getElementById('senha').type="text"
+     } else{
+       document.getElementById('senha').type="password"
+     }
+    
+   }
 
 </script>

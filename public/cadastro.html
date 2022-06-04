@@ -11,6 +11,7 @@
     <script src="./js/funcoes.js"></script>
 <link rel="icon" href="img/21-Pilots-logo.png">
     <script src="https://kit.fontawesome.com/0de1e0c120.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
 </head>
 
@@ -26,7 +27,7 @@
             <span id="mensagem_erro"></span>
         </div>
     </div>
-
+    <img class="ned" src="img/ned.gif" alt="">
     <div class="card">
         <div class="header">
         <img src="img/logo.png" >
@@ -45,8 +46,9 @@
 <span class="incorreto" id="incorreto"></span>
 
             Senha: <br>
-            <input id="senha" type="password" placeholder="Senha">
-
+            <input id="senha" name="password" type="password" placeholder="Senha">
+            <span onclick="olhar()" class="lnr lnr-eye"></span>
+            <span class="incorreto" id="incorreto2"></span>
             Confirmar senha: <br>
             <input id="confirmar_senha" type="password" placeholder="Confirmar senha">
 Escolha seu membro da banda favorito:
@@ -136,6 +138,21 @@ Escolha seu membro da banda favorito:
         else {
             setInterval(sumirMensagem, 5000)
         }
+        if(senhaVar.indexOf("#")== -1 && senhaVar.indexOf("@")== -1 ){
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "Ops, senha inválida! Verifique e tente novamente.";
+            senha.style.border ="1px solid red";
+            incorreto2.innerHTML=`A senha deve conter pelo menos um "@" ou "#"`
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+     
+
+
+        
 
         // Enviando o valor da nova input
         fetch("/usuarios/cadastrar", {
@@ -176,5 +193,14 @@ Escolha seu membro da banda favorito:
     function sumirMensagem() {
         cardErro.style.display = "none"
     }
-
+    function olhar(){
+     
+      if(document.getElementById('senha').type=="password"){
+        document.getElementById('senha').type="text"
+      } else{
+        document.getElementById('senha').type="password"
+      }
+     
+    }
+  
 </script>
