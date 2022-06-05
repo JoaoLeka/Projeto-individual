@@ -21,6 +21,7 @@ body{
     border-radius: 12px;
     background-color: #00bad0;
     width: 46%;
+   overflow-wrap:break-word;
 }
 
 input{
