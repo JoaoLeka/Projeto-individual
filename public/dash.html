@@ -14,9 +14,7 @@
 
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
-<!-- validarSessao(), -->
-<!-- onload=" atualizacaoPeriodica()" -->
-<!-- validarSessao() -->
+
 
 <body id="back" onload="validarSessao(), atualizacaoPeriodica()">
   <div class="janela">
@@ -157,92 +155,7 @@
 </html>
 
 <script>
-  // var nome0=""
-  // var nome1=""
-  // var nome2=""
-  // var nome3=""
-  // var nome4=""
-  // var nome5=""
-  // var album0=0
-  // var album1=0
-  // var album2=0
-  // var album3=0
-  // var album4=0
-  // var album5=0
-  // var total=0
-  // function requisitar() {
-  //         fetch("/medidas/requisitar").then(function (res1) {
-  //             if (res1.ok) {
-  //                 console.log(res1)
-  //                 res1.json().then(function (res1) {
-  //                     console.log("Dados recebidos: ", JSON.stringify(res1))
-  //                     nome0 = res1[0].nome
-  //                     album0 = res1[0].voto
-  //                     total += album0
-  //                     nome1 = res1[1].nome
-  //                     album1 = res1[1].voto
-  //                     total += album1
-  //                     nome2 = res1[2].nome
-  //                     album2 = res1[2].voto
-  //                     total += album2
-  //                     nome3 = res1[3].nome
-  //                     album3 = res1[3].voto
-  //                     total += album3
-  //                     nome4 = res1[4].nome
-  //                     album4 = res1[4].voto
-  //                     total += album4
-  //                     nome5 = res1[5].nome
-  //                     album5 = res1[5].voto
-  //                     total += album5
-  //     data3.datasets[0].data[0] = album0
-  //     data3.datasets[0].data[1] = album1
-  //     data3.datasets[0].data[2] = album2
-  //     data3.datasets[0].data[3] = album3
-  //     data3.datasets[0].data[4] = album4
-  //     data3.datasets[0].data[5] = album5
-  //                 }
-  //                 );
-  //             } else {
-  //                 throw ('Houve um erro ao pegar info!');
-  //             }
-  //         }).catch(function (res1) {
-  //             console.error(res1);
-  //         });
-  //     }
-  //     requisitar()
-
-  //     const data3 = {
-  //       labels:  [
-  //       'Trench',
-  //       'blurryface',
-  //       'Scaled and icy',
-  //       'Regional at best',
-  //       'Self titled',
-  //       'Vessel',
-  //     ],
-  //       datasets: [{
-  //         label: 'Votos',
-  //         backgroundColor: ['rgb(233, 49, 49)',
-  //        'rgb(231, 228, 57)',
-  //         'rgb(50, 25, 194)',
-  //          'rgb(10, 10, 10)',
-  //         'rgb(40, 255, 50)',
-  //         'rgb(40, 255, 50)'],
-
-  //         data: [0, 0, 0, 0, 0, 0],
-  //       }
-  //       ]
-  //     };
-  //     const config2 = {
-  //       type: 'bar',
-  //       data: data3,
-  //       options: {}
-  //     };
-  //     const myChart3 = new Chart(
-  //       document.getElementById('myChart3'),
-  //       config2
-  //     );
-
+  
   function cadastrar2() {
 
 
@@ -289,20 +202,7 @@
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
   b_integrante.innerHTML = sessionStorage.INTEGRANTE;
 
-  // verificar_autenticacao();
-
-  // O gráfico é construído com três funções:
-  // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-  // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-  // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-  // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-  // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-  // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-  //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-  //     Para ajustar o "select", ajuste o comando sql em src/models
-
+ 
 
   function menuDesaparecer() {
     setTimeout(function () {
@@ -404,9 +304,7 @@
       });
   }
 
-  // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-  // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
-  // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+  
 
 
   var membro0 = 0

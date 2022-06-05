@@ -129,7 +129,7 @@ function buscarArte(){
                       console.log("Dados recebidos: ", JSON.stringify(resposta))
                      
                      
-    for (var i = 0; i < 100; i++) {
+    for (var i = resposta.length-1; i >=0 ; i--) {
       nome = resposta[i].nome
                       artes = resposta[i].arte
                       fotos.innerHTML +=` <b> <p class="usuario">Autor: ${nome}</p></b><img src="${artes}" style="width: 500px;"> <br> `
@@ -149,8 +149,6 @@ function buscarArte(){
           // plotarArte()
       }
 
-      // function plotarArte(){
-        
-      // }
+      
 
 </script>

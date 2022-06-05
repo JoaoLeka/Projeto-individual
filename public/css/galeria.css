@@ -15,9 +15,15 @@ body{
 }
 
 .usuario{
-    color: #fbd604;
+    color: #c8417e;
     font-size: 30px;
-    -webkit-text-stroke-width: 0.8px;
-    -webkit-text-stroke-color: #000;
-    
+    border: 1px solid #c8417e;
+    border-radius: 12px;
+    background-color: #00bad0;
+    width: 46%;
+}
+
+input{
+outline: 0;
+
 }
