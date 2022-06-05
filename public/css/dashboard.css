@@ -16,6 +16,16 @@
     color: #c8417e;
     padding: 0;
   }
+  a{
+    text-decoration: none;
+    color: #c8417e;
+    
+}
+a:hover{
+
+text-decoration: underline;
+
+}
 
   .left-navbar{
     margin-top: -20;

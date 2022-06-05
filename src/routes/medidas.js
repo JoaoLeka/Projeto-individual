@@ -25,4 +25,8 @@ router.get("/requisitarMembro", function (req, res) {
     medidaController.requisitarMembro(req, res);
 });
 
+router.get("/buscar", function (req, res) {
+    medidaController.buscarArtes(req, res);
+});
+
 module.exports = router;

@@ -108,6 +108,16 @@ function requisitarMembro() {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+function buscarArtes() {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function requisitar()");
+    var instrucao = `
+    select us.nome as nome, ga.imagem as arte from galeria as ga
+inner join usuario as us
+on us.idUsuario=ga.fkusuario;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     buscarUltimasMedidas,
@@ -115,5 +125,6 @@ module.exports = {
     buscarMedidasEmTempoReal2,
     buscarUltimasMedidas2,
     requisitar,
-    requisitarMembro
+    requisitarMembro,
+    buscarArtes
 }

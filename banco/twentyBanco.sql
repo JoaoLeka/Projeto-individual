@@ -2,7 +2,7 @@ create database twenty;
 use twenty;
 
 
-drop table usuario;
+
 create table usuario(
 idUsuario int primary key auto_increment,
 nome varchar(45),
@@ -10,6 +10,19 @@ email varchar(45),
 senha varchar(45),
 integrante_favorito varchar(45)
 );
+
+create table galeria(
+fkUsuario int,
+foreign key (fkUsuario) references usuario(idUsuario),
+imagem varchar (1000));
+
+select*from usuario;
+
+select us.nome as nome, ga.imagem as arte from galeria as ga
+inner join usuario as us
+on us.idUsuario=ga.fkusuario;
+
+
 select*from usuario;
 select integrante_favorito as nome, count(integrante_favorito) as voto from usuario group by integrante_favorito ;
 

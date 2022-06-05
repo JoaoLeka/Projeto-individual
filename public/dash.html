@@ -20,17 +20,19 @@
 
 <body id="back" onload="validarSessao(), atualizacaoPeriodica()">
   <div class="janela">
-    <img id="hamburguer"  class="hamburguer2" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menuAparecer()">
+    <img id="hamburguer" class="hamburguer2" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menuAparecer()">
     <div id="nav" class="leftNavbar">
-      <img  class="hamburguer" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menuDesaparecer()">
+      <img class="hamburguer" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menuDesaparecer()">
       <div class="welcome">
         <h3>Bem vindo
-        <span id="b_usuario">usuário</span>!
-      </h3>
+          <span id="b_usuario">usuário</span>!
+        </h3>
       </div>
+      <p><a href="galeria.html">Galeria</a></p>
+      <p><a href="#">Votação</a></p>
       <img src="/img/logo.png" style="height: 150px" />
 
-     
+
 
       <div class="sair" onclick="limparSessao()">
         <img src="img/sair.png" alt="">
@@ -57,7 +59,9 @@
           <img src="img/21-Pilots-logo.png" alt="">
         </div>
         <button onclick="cadastrar2()" style="height: 40px">Votar</button>
-        <div id="popupVoto" class="pop"> <img src="img/Vg6.gif" style="width: 130px;" > <p> Voto realizado com sucesso</p></div>
+        <div id="popupVoto" class="pop"> <img src="img/Vg6.gif" style="width: 130px;">
+          <p> Voto realizado com sucesso</p>
+        </div>
       </div>
     </div>
   </div>
@@ -71,16 +75,16 @@
 
       <div class="trench">
         <b>
-        <p>Vessel</p> <br>
-        <span id="vessel">0</span>
-      </b>
+          <p>Vessel</p> <br>
+          <span id="vessel">0</span>
+        </b>
       </div>
       <div class="trench">
         <b>
           <p>Self-titled</p> <br>
           <span id="sel" class="span2">0</span>
         </b>
-        
+
       </div>
       <div class="trench">
         <b>
@@ -112,11 +116,11 @@
           <span id="total" class="span3">0</span>
         </b>
       </div>
-    
-  
-  </div>
 
-  <div id="resultado"></div>
+
+    </div>
+
+    <div id="resultado"></div>
   </div>
 
   <div id="diminuir2" class="grafico">
@@ -127,25 +131,25 @@
     <h3>Seu integrante da banda favorito é</h3>
     <h3><span id="b_integrante">usuário</span></h3>
     <div class="numeros">
-    <div class="trench">
-      <b>
-        <p>Josh</p> <br>
-        <span id="josh" class="span3">0</span>
-      </b>
-    </div>
-    <div class="trench">
-      <b>
-        <p>Tyler</p> <br>
-        <span id="tyler" class="span3">0</span>
-      </b>
-    </div>
+      <div class="trench">
+        <b>
+          <p>Josh</p> <br>
+          <span id="josh" class="span3">0</span>
+        </b>
+      </div>
+      <div class="trench">
+        <b>
+          <p>Tyler</p> <br>
+          <span id="tyler" class="span3">0</span>
+        </b>
+      </div>
 
-    <div class="trench">
-      <b>
-        <p>Total</p> <br>
-        <span id="totalMembroSpan" class="span3">0</span>
-      </b>
-    </div>
+      <div class="trench">
+        <b>
+          <p>Total</p> <br>
+          <span id="totalMembroSpan" class="span3">0</span>
+        </b>
+      </div>
     </div>
   </div>
 </body>
@@ -258,10 +262,10 @@
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
-     
+
         popup()
-        setTimeout(atualizar,2000)
-    
+        setTimeout(atualizar, 2000)
+
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
@@ -270,20 +274,20 @@
     return false;
   }
 
-  function popup(){
-document.getElementById('popupVoto').style.display= 'block'
+  function popup() {
+    document.getElementById('popupVoto').style.display = 'block'
 
   }
 
-  function atualizar(){
-          window.location= "dash.html"
-        }
+  function atualizar() {
+    window.location = "dash.html"
+  }
   let proximaAtualizacao;
   let proximaAtualizacao2;
   window.onload = obterDadosGrafico(1);
-  window.onload= fundo();  
+  window.onload = trocarFundo();
   b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
-b_integrante.innerHTML= sessionStorage.INTEGRANTE;
+  b_integrante.innerHTML = sessionStorage.INTEGRANTE;
 
   // verificar_autenticacao();
 
@@ -298,57 +302,57 @@ b_integrante.innerHTML= sessionStorage.INTEGRANTE;
 
   //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
   //     Para ajustar o "select", ajuste o comando sql em src/models
- 
 
-function menuDesaparecer(){
-  setTimeout(function(){
+
+  function menuDesaparecer() {
+    setTimeout(function () {
       nav.style.display = 'none';
-      hamburguer.style.display="block"
-    },0)
-  
+      hamburguer.style.display = "block"
+    }, 0)
 
-  document.getElementById("nav").style.transition = "all 1s"
-  document.getElementById("diminuir1").style.transition = "all 1s"
-  document.getElementById("diminuir2").style.transition = "all 1s"
-  document.getElementById("diminuir3").style.transition = "all 1s"
-  document.getElementById("diminuir1").style.marginLeft = "210px";
-  document.getElementById("diminuir2").style.marginLeft = "210px";
-  document.getElementById("diminuir3").style.marginLeft = "210px";
-}
-function menuAparecer(){
-  setTimeout(function(){
+
+    document.getElementById("nav").style.transition = "all 1s"
+    document.getElementById("diminuir1").style.transition = "all 1s"
+    document.getElementById("diminuir2").style.transition = "all 1s"
+    document.getElementById("diminuir3").style.transition = "all 1s"
+    document.getElementById("diminuir1").style.marginLeft = "210px";
+    document.getElementById("diminuir2").style.marginLeft = "210px";
+    document.getElementById("diminuir3").style.marginLeft = "210px";
+  }
+  function menuAparecer() {
+    setTimeout(function () {
       nav.style.display = 'flex';
-    },300); 
- 
-  document.getElementById("nav").style.transition = "all 1s"
-  hamburguer.style.display="none"
-  document.getElementById("diminuir1").style.transition = "all 1s"
-  document.getElementById("diminuir2").style.transition = "all 1s"
-  document.getElementById("diminuir3").style.transition = "all 1s"
-  document.getElementById("diminuir1").style.marginLeft = "310px";
-  document.getElementById("diminuir2").style.marginLeft = "310px";
-  document.getElementById("diminuir3").style.marginLeft = "310px";
-}
+    }, 300);
 
-function fundo(){
-if(sessionStorage.INTEGRANTE=="Josh Dun"){
-  document.getElementById('back').style.backgroundImage = "url('/img/fundoJosh.jpg')";
-  document.getElementById('back').style.backgroundSize = "100%";
-  document.getElementById('back').style.backgroundRepeat = "no-repeat";
-  document.getElementById('back').style.backgroundAttachment= "fixed";
-  document.getElementById('back').style.display="inline-block";
-  document.getElementById('back').style.overflowX="hidden"
-} else{
-  document.getElementById('back').style.backgroundImage = "url('/img/tylerFundo.jpg')";
-  document.getElementById('back').style.backgroundSize = "100%";
-  document.getElementById('back').style.backgroundRepeat = "no-repeat";
-  document.getElementById('back').style.backgroundAttachment= "fixed";
-  document.getElementById('back').style.display="inline-block";
-  document.getElementById('back').style.overflowX="hidden"
+    document.getElementById("nav").style.transition = "all 1s"
+    hamburguer.style.display = "none"
+    document.getElementById("diminuir1").style.transition = "all 1s"
+    document.getElementById("diminuir2").style.transition = "all 1s"
+    document.getElementById("diminuir3").style.transition = "all 1s"
+    document.getElementById("diminuir1").style.marginLeft = "310px";
+    document.getElementById("diminuir2").style.marginLeft = "310px";
+    document.getElementById("diminuir3").style.marginLeft = "310px";
+  }
 
-}
+  function trocarFundo() {
+    if (sessionStorage.INTEGRANTE == "Josh Dun") {
+      document.getElementById('back').style.backgroundImage = "url('/img/fundoJosh.jpg')";
+      document.getElementById('back').style.backgroundSize = "100%";
+      document.getElementById('back').style.backgroundRepeat = "no-repeat";
+      document.getElementById('back').style.backgroundAttachment = "fixed";
+      document.getElementById('back').style.display = "inline-block";
+      document.getElementById('back').style.overflowX = "hidden"
+    } else {
+      document.getElementById('back').style.backgroundImage = "url('/img/tylerFundo.jpg')";
+      document.getElementById('back').style.backgroundSize = "100%";
+      document.getElementById('back').style.backgroundRepeat = "no-repeat";
+      document.getElementById('back').style.backgroundAttachment = "fixed";
+      document.getElementById('back').style.display = "inline-block";
+      document.getElementById('back').style.overflowX = "hidden"
 
-}
+    }
+
+  }
 
   function obterDadosGrafico(idUsuario) {
     if (proximaAtualizacao != undefined) {
@@ -405,17 +409,17 @@ if(sessionStorage.INTEGRANTE=="Josh Dun"){
   // A função *plotarGrafico* também invoca a função *atualizarGrafico*
 
 
-  var membro0=0
-  var membro1=0
-  var totalMembro=0
-  var membroLista= []
+  var membro0 = 0
+  var membro1 = 0
+  var totalMembro = 0
+  var membroLista = []
   function plotarGrafico(resposta, idUsuario) {
     console.log("iniciando plotagem do gráfico...");
 
     var dados = {
       labels: [],
       datasets: [
-      {
+        {
           backgroundColor: ['blue', 'red'],
           label: "O favorito da galera",
           data: []
@@ -425,18 +429,18 @@ if(sessionStorage.INTEGRANTE=="Josh Dun"){
 
     for (i = 0; i < resposta.length; i++) {
       var registro = resposta[i];
-    if(registro.membro=="Tyler Joseph"){
-      dados.datasets[0].data.push(registro.voto2);
-      membro0=registro.voto2
-      tyler.innerHTML= membro0
-    } else if(registro.membro=="Josh Dun"){
-      dados.datasets[0].data.push(registro.voto2);
-      membro1=registro.voto2
-      josh.innerHTML= membro1
-    }
+      if (registro.membro == "Tyler Joseph") {
+        dados.datasets[0].data.push(registro.voto2);
+        membro0 = registro.voto2
+        tyler.innerHTML = membro0
+      } else if (registro.membro == "Josh Dun") {
+        dados.datasets[0].data.push(registro.voto2);
+        membro1 = registro.voto2
+        josh.innerHTML = membro1
+      }
       dados.labels.push(registro.membro);
-      totalMembro=membro0+membro1
-      totalMembroSpan.innerHTML= totalMembro
+      totalMembro = membro0 + membro1
+      totalMembroSpan.innerHTML = totalMembro
     }
 
     membroLista.push(membro0, membro1)
@@ -492,11 +496,11 @@ if(sessionStorage.INTEGRANTE=="Josh Dun"){
       },
     });
 
-  
+
     obterDadosGrafico2(1);
-  
+
   }
-var totalVotos=0
+  var totalVotos = 0
   var album0 = 0
   var album1 = 0
   var album2 = 0
@@ -525,33 +529,33 @@ var totalVotos=0
       if (registro.nome == "trench") {
         dados2.datasets[0].data.push(registro.voto);
         album0 = registro.voto
-trench.innerHTML= album0
+        trench.innerHTML = album0
       } else if (registro.nome == "blurryface") {
         dados2.datasets[0].data.push(registro.voto);
         album1 = registro.voto
-        blurry.innerHTML= album1
+        blurry.innerHTML = album1
       } else if (registro.nome == "scaled and icy") {
         dados2.datasets[0].data.push(registro.voto);
         album2 = registro.voto
-        sai.innerHTML= album2
+        sai.innerHTML = album2
       } else if (registro.nome == "regional at best") {
         dados2.datasets[0].data.push(registro.voto);
         album3 = registro.voto
-rab.innerHTML= album3
+        rab.innerHTML = album3
       } else if (registro.nome == "self-titled") {
         dados2.datasets[0].data.push(registro.voto);
         album4 = registro.voto
-        sel.innerHTML= album4
-        
+        sel.innerHTML = album4
+
       } else if (registro.nome == "vessel") {
         dados2.datasets[0].data.push(registro.voto);
         album5 = registro.voto
-vessel.innerHTML= album5
+        vessel.innerHTML = album5
 
       }
       dados2.labels.push(registro.nome);
-      totalVotos= album0+album1+album2+album3+album4+album5
-      total.innerHTML= totalVotos
+      totalVotos = album0 + album1 + album2 + album3 + album4 + album5
+      total.innerHTML = totalVotos
     }
 
     console.log("dados2", dados2);
@@ -671,7 +675,7 @@ vessel.innerHTML= album5
   //             // tirando e colocando valores no gráfico
   //             dados.labels.shift(); // apagar o primeiro
 
-           
+
 
   //             dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
   //             dados.datasets[0].data.push(novoRegistro[0].voto); // incluir uma nova medida de temperatura
@@ -693,7 +697,7 @@ vessel.innerHTML= album5
 
   // }
 
-  
+
 
   function sele() {
     var seleVideo = album.value;

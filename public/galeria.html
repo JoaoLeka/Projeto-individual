@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria</title>
+    <link rel="stylesheet" href="css/galeria.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="../js/funcoes.js"></script>
+    <link rel="icon" href="../img/21-Pilots-logo.png" />
+</head>
+<body id="back" onload="validarSessao(), atualizacaoPeriodica()">
+    <img id="hamburguer" class="hamburguer2" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menuAparecer()">
+    <div id="nav" class="leftNavbar">
+      <img class="hamburguer" src="img/hamburger-menu-icon-png-29.jpg" alt="" onclick="menuDesaparecer()">
+      <div class="welcome">
+        <h3>Bem vindo
+          <span id="b_usuario">usuário</span>!
+         
+        </h3>
+      </div>
+      <p><a href="#">Galeria</a></p>
+      <p><a href="dash.html">Votação</a></p>
+      <img src="img/logo.png" style="height: 150px" />
+
+
+
+      <div class="sair" onclick="limparSessao()">
+        <img src="img/sair.png" alt="">
+      </div>
+    </div>
+    <div id="diminuir1" class="alinhar">
+   <input id="imagem" type="text" placeholder="Envie a url de sua arte">
+    <button onclick="enviar()">enviar</button>
+    <div id="fotos" class="galeria" ></div>
+ 
+</div>
+</body>
+</html>
+
+<script>
+ window.onload = trocarFundo();
+ window.onload = buscarArte();
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+  let proximaAtualizacao;
+
+function enviar(){
+    var fotoVar = imagem.value;
+var idVar = Number(sessionStorage.ID_USUARIO);
+
+fetch("/usuarios/enviarart", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+
+
+    fotoServer: fotoVar,
+    idServer: idVar,
+  }),
+})
+  .then(function (resposta) {
+    console.log("resposta: ", resposta);
+    atualizar()
+
+  })
+  .catch(function (resposta) {
+    console.log(`#ERRO: ${resposta}`);
+  });
+
+return false;
+}
+function atualizar() {
+    window.location = "galeria.html"
+  }
+
+function menuDesaparecer() {
+    setTimeout(function () {
+      nav.style.display = 'none';
+      hamburguer.style.display = "block"
+    }, 0)
+
+
+    document.getElementById("nav").style.transition = "all 1s"
+    
+  
+  }
+  function menuAparecer() {
+    setTimeout(function () {
+      nav.style.display = 'flex';
+    }, 300);
+
+    document.getElementById("nav").style.transition = "all 1s"
+    hamburguer.style.display = "none"
+    
+    
+  }
+
+  function trocarFundo() {
+    if (sessionStorage.INTEGRANTE == "Josh Dun") {
+      document.getElementById('back').style.backgroundImage = "url('/img/fundoJosh.jpg')";
+      document.getElementById('back').style.backgroundSize = "100%";
+      document.getElementById('back').style.backgroundRepeat = "no-repeat";
+      document.getElementById('back').style.backgroundAttachment = "fixed";
+      document.getElementById('back').style.display = "inline-block";
+      document.getElementById('back').style.overflowX = "hidden"
+    } else {
+      document.getElementById('back').style.backgroundImage = "url('/img/tylerFundo.jpg')";
+      document.getElementById('back').style.backgroundSize = "100%";
+      document.getElementById('back').style.backgroundRepeat = "no-repeat";
+      document.getElementById('back').style.backgroundAttachment = "fixed";
+      document.getElementById('back').style.display = "inline-block";
+      document.getElementById('back').style.overflowX = "hidden"
+
+    }
+
+  }
+
+var nome= ""
+var artes= ""
+var arteLista= []
+function buscarArte(){
+  fetch("/medidas/buscar").then(function (resposta) {
+              if (resposta.ok) {
+                  console.log(resposta)
+                  resposta.json().then(function (resposta) {
+                      console.log("Dados recebidos: ", JSON.stringify(resposta))
+                     
+                     
+    for (var i = 0; i < 100; i++) {
+      nome = resposta[i].nome
+                      artes = resposta[i].arte
+                      fotos.innerHTML +=` <b> <p class="usuario">Autor: ${nome}</p></b><img src="${artes}" style="width: 500px;"> <br> `
+
+      }
+                      
+
+                      
+                  }
+                  );
+              } else {
+                  throw ('Houve um erro ao pegar info!');
+              }
+          }).catch(function (resposta) {
+              console.error(resposta);
+          });
+          // plotarArte()
+      }
+
+      // function plotarArte(){
+        
+      // }
+
+</script>

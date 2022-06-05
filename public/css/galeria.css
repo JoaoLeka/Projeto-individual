@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.galeria{
+    display: inline-block;
+    width: 90%;
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.alinhar{
+    margin-left: 460px;
+}
+
+.usuario{
+    color: #fbd604;
+    font-size: 30px;
+    -webkit-text-stroke-width: 0.8px;
+    -webkit-text-stroke-color: #000;
+    
+}
