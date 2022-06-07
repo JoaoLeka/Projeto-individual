@@ -194,11 +194,13 @@ Escolha seu membro da banda favorito:
         cardErro.style.display = "none"
     }
     function olhar(){
-     
-      if(document.getElementById('senha').type=="password"){
+       
+      if(document.getElementById('senha').type=="password" || document.getElementById('confirmar_senha').type=="password" ){
         document.getElementById('senha').type="text"
+        document.getElementById('confirmar_senha').type="text"
       } else{
         document.getElementById('senha').type="password"
+        document.getElementById('confirmar_senha').type="password"
       }
      
     }

@@ -19,12 +19,18 @@ body{
     font-size: 30px;
     border: 1px solid #c8417e;
     border-radius: 12px;
-    background-color: #00bad0;
+    background-color: #00bbd0c9;
     width: 46%;
    overflow-wrap:break-word;
 }
 
 input{
 outline: 0;
+border-radius:  5px;
+border:  2px solid #c8417e ;
 
+}
+
+.envio{
+    height: 25px;
 }

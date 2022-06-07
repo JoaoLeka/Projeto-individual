@@ -23,13 +23,13 @@ inner join usuario as us
 on us.idUsuario=ga.fkusuario;
 
 
+
 select*from usuario;
+
+-- contagem dos integrantes
 select integrante_favorito as nome, count(integrante_favorito) as voto from usuario group by integrante_favorito ;
 
-select count(idUsuario) as numeroDeCadastro from usuario;
 
-insert into usuario values
-(null, 'Denise Tupac','denise@outlook.com','12345');
 
 
 
@@ -40,21 +40,32 @@ idAlbum int primary key auto_increment,
 nome varchar(45));
 
 insert into album values
-(null, 'vessel'),
+(null, 'trench'),
 (null, 'blurryface'),
 (null, 'scaled and icy'),
 (null, 'regional at best'),
-(null, 'self-titled');
+(null, 'self-titled'),
+(null, 'vessel');
 
 create table votos(
 fkAlbum int,
 foreign key (fkAlbum) references album (idAlbum));
+
+select*from votos;
+insert into votos values
+('1'),
+('2'),
+('3'),
+('4'),
+('5'),
+('6');
+
 select*from album;
 select*from votos;
 select*from usuario;
 
-select count(fkalbum) as trench from votos where fkalbum='1';
 
+-- votos dos albuns
 select al.nome as album, count(vo.fkalbum) as votos from votos as vo
 inner join album as al
 on al.idalbum=vo.fkalbum group by vo.fkalbum;
